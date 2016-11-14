@@ -1,4 +1,8 @@
+import os
+
+
 def board(x, y):
+    """Create a board"""
     list = []
     for row in range(x):
         list.append([])
@@ -10,15 +14,15 @@ def board(x, y):
     return list
 
 
-def drukowanie_tablicy(lista):
+def show_board(lista):
     for i in lista:
         print(''.join(i))
 
-def move(list):
-    pass
 
-def getch():
-    import sys, tty, termios
+def move(list):
+    import sys
+    import tty
+    import termios
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
@@ -26,13 +30,31 @@ def getch():
         ch = sys.stdin.read(1)
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return ch
 
-x = getch()
-print(x)
+    x = ch
+    print(x)
+
+    if x == 'w':
+        pass
+    if x == 's':
+        pass
+    if x == 'a':
+        pass
+    if x == 'd':
+        pass
+
+    return list
+
 
 def main():
-    drukowanie_tablicy(board(15, 50))
+    game_board = board(15, 50)
+
+    while True:
+        os.system('clear')
+        show_board(game_board)
+        game_board = move(game_board)
+        if input("press x to exit") == "x":
+            break
 
 
 if __name__ == "__main__":
