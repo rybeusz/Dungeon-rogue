@@ -7,13 +7,8 @@ def board(x, y, player_x, player_y):
     for row in range(x):
         list.append([])
         for column in range(y):
-<<<<<<< HEAD
-            if row == 0:
-                list[row].append('x')
-=======
             if row == 0 or row == x-1 or column == 0 or column == y-1:
                 list[row].append('#')
->>>>>>> dec4e61352327b9eed141003c9392c27700d0148
             else:
                 list[row].append('.')
     list[player_x][player_y] = '@'
