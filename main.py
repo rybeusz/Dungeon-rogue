@@ -15,4 +15,9 @@ def drukowanie_tablicy(lista):
         print(''.join(i))
 
 
-drukowanie_tablicy(tablica(15,10))
+def main():
+    drukowanie_tablicy(tablica(15, 10))
+
+
+if __name__ == "__main__":
+    main()
