@@ -1,12 +1,12 @@
-def tablica(x=5, y=5):
-    lista = []
-    for rzad in range(x):
-        lista.append([])
-        for kolumn in range(y):
-            if rzad == 0 or rzad == x-1 or kolumn == 0 or kolumn == y-1:
-                lista[rzad].append('x')
+def board(x ,y):
+    list = []
+    for row in range(x):
+        list.append([])
+        for column in range(y):
+            if row == 0
+                list[row].append('x')
             else:
-                lista[rzad].append('.')
+                list[row].append('.')
     return lista
 
 
