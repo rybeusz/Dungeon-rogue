@@ -7,7 +7,7 @@ def board(x ,y):
                 list[row].append('x')
             else:
                 list[row].append('.')
-    return lista
+    return list
 
 
 def drukowanie_tablicy(lista):
@@ -15,24 +15,31 @@ def drukowanie_tablicy(lista):
         print(''.join(i))
 
 def move(list):
-    pass
+    def getch():
+        import sys, tty, termios
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
 
-def getch():
-    import sys, tty, termios
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
-    try:
-        tty.setraw(sys.stdin.fileno())
-        ch = sys.stdin.read(1)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return ch
+    x = getch()
+    print(x)
 
-x = getch()
-print(x)
+    if x == 'w':
+
+
+    if x == 's':
+
+    if x == 'a':
+
+    if x == 'd':
 
 def main():
-    drukowanie_tablicy(tablica(15, 10))
+    drukowanie_tablicy(list(15, 10))
 
 
 if __name__ == "__main__":
