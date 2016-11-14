@@ -11,7 +11,7 @@ def board(x, y, player_x, player_y):
             if row == 0 or row == x-1 or column == 0 or column == y-1:
                 list[row].append('#')
             else:
-                list[row].append('.')
+                list[row].append('/')
     list[player_x][player_y] = '@'
     return list
 
@@ -24,6 +24,7 @@ def main():
     player_x = 3
     player_y = 3
     game_board = board(15, 50, player_x, player_y)
+    inventory = 0
 
     while True:
         os.system('clear')
