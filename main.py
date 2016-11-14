@@ -1,7 +1,7 @@
 import os
 
 
-def board(x, y):
+def board(x, y, player_x, player_y):
     """Create a board"""
     list = []
     for row in range(x):
@@ -11,6 +11,7 @@ def board(x, y):
                 list[row].append('#')
             else:
                 list[row].append('.')
+    list[player_x][player_y] = '@'
     return list
 
 
@@ -19,10 +20,11 @@ def show_board(lista):
         print(''.join(i))
 
 
-def move(list):
+def move(list, player_x, player_y):
     import sys
     import tty
     import termios
+    special_char = ('#')
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
@@ -33,26 +35,38 @@ def move(list):
 
     x = ch
     print(x)
+    if x == 'w' and (list[player_x-1][player_y] not in special_char):
+        list[player_x][player_y] = "."
+        player_x -= 1
+        list[player_x][player_y] = "@"
+    elif x == 's' and (list[player_x+1][player_y] not in special_char):
+        list[player_x][player_y] = "."
+        player_x += 1
+        list[player_x][player_y] = "@"
+    elif x == 'a' and (list[player_x][player_y-1] not in special_char):
+        list[player_x][player_y] = "."
+        player_y -= 1
+        list[player_x][player_y] = "@"
+    elif x == 'd' and (list[player_x][player_y+1] not in special_char):
+        list[player_x][player_y] = "."
+        player_y += 1
+        list[player_x][player_y] = "@"
 
-    if x == 'w':
-        pass
-    if x == 's':
-        pass
-    if x == 'a':
-        pass
-    if x == 'd':
-        pass
-
-    return list
+    return list, player_x, player_y
 
 
 def main():
-    game_board = board(15, 50)
+    player_x = 3
+    player_y = 3
+    game_board = board(15, 50, player_x, player_y)
 
     while True:
         os.system('clear')
         show_board(game_board)
-        game_board = move(game_board)
+        zwrot = move(game_board, player_x, player_y)
+        game_board = zwrot[0]
+        player_x = zwrot[1]
+        player_y = zwrot[2]
         if input("press x to exit") == "x":
             break
 
