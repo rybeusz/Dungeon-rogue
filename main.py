@@ -15,12 +15,13 @@ def board(x, y, player_x, player_y):
     return list
 
 
-def show_board(lista):
-    for i in lista:
+def show_board(list):
+    for i in list:
         print(''.join(i))
 
 
 def move(list, player_x, player_y):
+    # black magic
     import sys
     import tty
     import termios
@@ -32,25 +33,20 @@ def move(list, player_x, player_y):
         ch = sys.stdin.read(1)
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    # end of black magic
 
-    x = ch
+    x = ch  # x is inputed character
     print(x)
-    if x == 'w' and (list[player_x-1][player_y] not in special_char):
-        list[player_x][player_y] = "."
-        player_x -= 1
-        list[player_x][player_y] = "@"
-    elif x == 's' and (list[player_x+1][player_y] not in special_char):
-        list[player_x][player_y] = "."
-        player_x += 1
-        list[player_x][player_y] = "@"
-    elif x == 'a' and (list[player_x][player_y-1] not in special_char):
-        list[player_x][player_y] = "."
-        player_y -= 1
-        list[player_x][player_y] = "@"
-    elif x == 'd' and (list[player_x][player_y+1] not in special_char):
-        list[player_x][player_y] = "."
-        player_y += 1
-        list[player_x][player_y] = "@"
+    key = {"w": (-1, 0), "s": (1, 0), "a": (0, -1), "d": (0, 1)}
+
+    if x in ("w", "s", "a", "d"):
+        if list[player_x + key[x][0]][player_y + key[x][1]] not in special_char:
+            list[player_x][player_y] = "."
+            list[player_x + key[x][0]][player_y + key[x][1]] = "@"
+            player_x += key[x][0]
+            player_y += key[x][1]
+    if x == "x":
+        quit()
 
     return list, player_x, player_y
 
@@ -67,8 +63,6 @@ def main():
         game_board = zwrot[0]
         player_x = zwrot[1]
         player_y = zwrot[2]
-        if input("press x to exit") == "x":
-            break
 
 
 if __name__ == "__main__":
