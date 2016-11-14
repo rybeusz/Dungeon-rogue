@@ -3,7 +3,7 @@ def board(x ,y):
     for row in range(x):
         list.append([])
         for column in range(y):
-            if row == 0
+            if row == 0:
                 list[row].append('x')
             else:
                 list[row].append('.')
