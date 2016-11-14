@@ -1,13 +1,13 @@
-def board(x ,y):
+def board(x, y):
     list = []
     for row in range(x):
         list.append([])
         for column in range(y):
-            if row == 0
-                list[row].append('x')
+            if row == 0 or row == x-1 or column == 0 or column == y-1:
+                list[row].append('#')
             else:
                 list[row].append('.')
-    return lista
+    return list
 
 
 def drukowanie_tablicy(lista):
@@ -16,7 +16,7 @@ def drukowanie_tablicy(lista):
 
 
 def main():
-    drukowanie_tablicy(tablica(15, 10))
+    drukowanie_tablicy(board(15, 50))
 
 
 if __name__ == "__main__":
