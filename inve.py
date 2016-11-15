@@ -1,51 +1,51 @@
 def display_inventory(inventory):
     """prints keys and values of inventory"""
     weight = []
+    amount = []
     print('Inventory:')
     for key, value in inventory.items():
         print('{} {}'.format(value[0], key))
     for value in inventory.values():
-        weight.append(value[0])
-
-    print('Total number of items: {}'.format(sum(weight)))
+        weight.append(value[2])
+        amount.append(value[0])
+    print('total weigh of items: {}'.format(sum(weight)))
+    print('Total number of items: {}'.format(sum(amount)))
 
 
 def add_to_inventory(inventory, loot):
     """ adding items from lists to inventory"""
-    #loot = [['gold coin', 'other'], ['dagger', 'weapon'], ['gold coin', 'other'], ['gold coin', 'other'], ['ruby', 'other']]
-    #inv = {'rope': [1, 'other'], 'torch': [6,'other'], 'gold coin': [42, 'other'], 'dagger': [1,'weapon'],
-    #       'arrow': [12, 'weapon']}
-    #backpack[items[0][0]].append(items[0][1])
+    #inv = {'rope': [1, 'other', 12], 'torch': [6, 'other', 12], 'gold coin': [42, 'other', 42],
+    #       'dagger': [1, 'weapon', 2],
+    #       'arrow': [12, 'weapon', 12]}
+    #loot = [['gold coin', 'other', 1], ['dagger', 'weapon', 2], ['gold coin', 'other', 1], ['gold coin', 'other', 1],
+    #        ['ruby', 'other', 1]]
     for item in loot:
         if item[0] in inventory.keys():
-            inventory[item[0]][0] += 1
+            inventory[item[0]][0] += 1 # amount
+            inventory[item[0]][2] += item[2] # weight
         else:
-            inventory[item[0]] = [1, item[1]]
+            inventory[item[0]] = [1, item[1], item[2]]
     return inventory
 
 
-def print_table(inventory, order=None):
-    """print inventory in order or no"""
-    list_of_len = [len('{:>6} {:>12}'.format(value, key)) for key, value in inventory.items()]
+def print_table(inventory):
+    """print backpack in order"""
+    amount = []
+    weight = []
+    for value in inventory.values():
+        amount.append(value[0])
+        weight.append(value[2])
+    list_of_len = [len('{:>12} {:>7} {:>7}'.format(key, value[0], value[2])) for key, value in inventory.items()]
     max_len = max(list_of_len)
-    elif order == 'count,desc':
-        sorted_dict = sorted(inventory.items(), key=lambda index: index[1], reverse=True)  # sort by value
-        print('Inventory:')
-        print("{:>6} {:>12}".format('count', 'item name'))
-        print('-' * max_len)
-        for key, value in sorted_dict:
-            print('{:>6} {:>12}'.format(value, key))
-        print('-' * max_len)
-        print('Total number of items: {}'.format(sum(inventory.values())))
-    elif order == 'count,asc':
-        sorted_dict = sorted(inventory.items(), key=lambda index: index[1], reverse=False)
-        print('Inventory:')
-        print("{:>6} {:>12}".format('count', 'item name'))
-        print('-' * max_len)
-        for key, value in sorted_dict:
-            print('{:>6} {:>12}'.format(value, key))
-        print('-' * max_len)
-        print('Total number of items: {}'.format(sum(inventory.values())))
+    sorted_dict = sorted(inventory.items(), key=lambda index: index[1], reverse=True)  # sort by value
+    print('Inventory:')
+    print('{:>12} {:>7} {:>7}'.format('item name', 'amount', 'weight'))
+    print('-' * max_len)
+    for key, value in sorted_dict:
+        print('{:>12} {:>7} {:>7}'.format(key, value[0], value[2]))
+    print('-' * max_len)
+    print('Total number of items: {}'.format(sum(amount)))
+    print('Total weight: {}'.format(sum(weight)))
 
 
 def import_inventory(inventory, filename='import_inventory.csv'):
@@ -90,12 +90,14 @@ def export_inventory(inventory, filename='export_inventory.csv'):
 
 def main():
     """check all def"""
-    inv = {'rope': [1, 'other'], 'torch': [6,'other'], 'gold coin': [42, 'other'], 'dagger': [1,'weapon'],
-           'arrow': [12, 'weapon']}
-    loot = [['gold coin', 'other'], ['dagger', 'weapon'], ['gold coin', 'other'], ['gold coin', 'other'], ['ruby', 'other']]
+    inv = {'rope': [1, 'other', 12], 'torch': [6,'other',12], 'gold coin': [42, 'other', 42], 'dagger': [1,'weapon', 2],
+           'arrow': [12, 'weapon', 12]}
+    loot = [['gold coin', 'other', 1], ['dagger', 'weapon', 2], ['gold coin', 'other', 1], ['gold coin', 'other', 1], ['ruby', 'other', 1]]
     display_inventory(inv)
     add_to_inventory(inv, loot)
     display_inventory(inv)
     print(inv)
+    print_table(inv)
+    import_inventory(inv)
 if __name__ == '__main__':
     main()
