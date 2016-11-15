@@ -1,10 +1,10 @@
 
-def movement(list, player_x, player_y):
+def movement(list, player_x, player_y, inv):
     # black magic
     import sys
     import tty
     import termios
-    special_char = ('#')
+    special_char = '#'
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
@@ -16,11 +16,9 @@ def movement(list, player_x, player_y):
 
     print(x)
     key = {"w": (-1, 0), "s": (1, 0), "a": (0, -1), "d": (0, 1)}
-    inventor = 0
     if x in ("w", "s", "a", "d"):
         if list[player_x + key[x][0]][player_y + key[x][1]] == '/':
-            print('sssssß')
-            inventor += 1
+            inv+= 1
         if list[player_x + key[x][0]][player_y + key[x][1]] not in special_char:
             list[player_x][player_y] = "."
             list[player_x + key[x][0]][player_y + key[x][1]] = "@"
@@ -28,7 +26,7 @@ def movement(list, player_x, player_y):
             player_y += key[x][1]
 
     if x == "x":
-        print(inventor)
+        print(inv)
         quit()
 
-    return list, player_x, player_y
+    return list, player_x, player_y, inv
