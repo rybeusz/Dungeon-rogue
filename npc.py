@@ -41,7 +41,7 @@ def boss():
             print("GJ u win the game")  # + dodac okreslana liczbe kasy
             quit()
     while backpack["vodka"] >= 2:
-        input("So how much u wanna.....")
+        input("So how much u wanna for rearaeare")
 
 
 
