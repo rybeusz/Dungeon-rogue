@@ -1,6 +1,8 @@
 import os
 from move import *
 import random
+import time
+from termcolor import cprint
 
 
 def board(x, y, player_x, player_y):
@@ -116,10 +118,25 @@ def levels(level):
         inventory = move_variables[3]
 
 
+def fun_effectwow():
+    """Special effect"""
+    f = open("effect.txt", 'r')
+    colorlist = ["red", "green", "yellow", "blue", "magenta", "cyan", "white"]
+    effect_list = [line[:-1] for line in f]
+    f.close()
+    for i in range(len(effect_list[0])):
+        os.system('clear')
+        for x in range(len(effect_list)):
+            cprint(effect_list[x][:i], random.choice(colorlist))
+        time.sleep(0.02)
+
+
 def main():
+    fun_effectwow()
     #levels(1)
     #levels(2)
-    levels(3)
+    #levels(3)
+    input()
 
 
 if __name__ == "__main__":
