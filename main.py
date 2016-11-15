@@ -48,6 +48,7 @@ def random_buildings(game_board, level):
                     game_board[i][z] = '#'
         game_board[y+7][x+5+7] = '.'  # tavern doors
         game_board[y+7][x+6+7] = '.'  # tavern doors
+        game_board[y+4][x+5+7] = 'O'  # tavern man
     if level == 2:
         x = random_area[1]
         y = random_area[0]
@@ -56,40 +57,54 @@ def random_buildings(game_board, level):
                 if i == y+4 or i == y+7 or z == x+4 or z == x+18:
                     game_board[i][z] = '#'
         game_board[y+7-1][x+4] = '.'
-
-        while x == random_area[1] and y == random_area[0]: # random area for wheat
+        game_board[y+5][x+10+7] = 'B'  # farmer wife
+        while x == random_area[1] and y == random_area[0]:  # random area for wheat
             x = random.randrange(0, 31, 30)
             y = random.randrange(0, 11, 10)
-
-        for i in range(y+2, y+8):
+        for i in range(y+2, y+8):  # wheat  generating
             for z in range(x+3, x+27):
-                    game_board[i][z] = '/'
-
+                    game_board[i][z] = chr(182)#'/'
 
     if level == 3:
-        pass
+        x = random_area[1]
+        y = random_area[0]
+        for i in range(y+3, y+8):
+            for z in range(x+9, x+17):
+                if i == y+3 or i == y+7 or z == x+9 or z == x+16:
+                    game_board[i][z] = '#'
+        game_board[y+7][x+5+7] = '.'
+        game_board[y+7][x+6+7] = '.'
+        game_board[y+4][x+5+7] = chr(216) # boss
+        while x == random_area[1] and y == random_area[0]:  # random area for new build
+            x = random.randrange(0, 31, 30)
+            y = random.randrange(0, 11, 10)
+        for i in range(y+2, y+7):
+            for z in range(x+8, x+18):
+                if i == y+2 or i == y+6 or z == x+8 or z == x+17:
+                    game_board[i][z] = '#'
+        game_board[y+3][x+8] = '.'
     return game_board
 
 
 def levels(level):
     inventory = 0
-    # level 1
     if level == 1:
         player_x = 3
         player_y = 3
         game_board = board(20, 60, player_x, player_y)
-        game_board = random_item(game_board)
         game_board = random_buildings(game_board, level)
-    # level 2
+        game_board = random_item(game_board)
     if level == 2:
         player_x = 1
         player_y = 1
         game_board = board(20, 60, player_x, player_y)
-        #game_board = random_item(game_board)
         game_board = random_buildings(game_board, level)
-    # level 3
     if level == 3:
-        pass
+        player_x = 3
+        player_y = 3
+        game_board = board(20, 60, player_x, player_y)
+        game_board = random_buildings(game_board, level)
+        game_board = random_item(game_board)
 
     while True:
         os.system('clear')
@@ -103,7 +118,7 @@ def levels(level):
 
 def main():
     #levels(1)
-    levels(2)
+    #levels(2)
     levels(3)
 
 

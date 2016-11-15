@@ -4,7 +4,7 @@ def movement(list, player_x, player_y, inv):
     import sys
     import tty
     import termios
-    special_char = '#'
+    special_char = ["#","O","B",chr(216),"&"]
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
@@ -24,6 +24,12 @@ def movement(list, player_x, player_y, inv):
             list[player_x + key[x][0]][player_y + key[x][1]] = "@"
             player_x += key[x][0]
             player_y += key[x][1]
+        elif list[player_x + key[x][0]][player_y + key[x][1]] == "O":
+            
+        elif list[player_x + key[x][0]][player_y + key[x][1]] == "B":
+
+        elif list[player_x + key[x][0]][player_y + key[x][1]] == chr(216):
+
 
     if x == "x":
         print(inv)
