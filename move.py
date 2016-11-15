@@ -1,3 +1,5 @@
+import npc
+
 
 def movement(list, player_x, player_y, inv):
     # black magic
@@ -25,7 +27,7 @@ def movement(list, player_x, player_y, inv):
             player_x += key[x][0]
             player_y += key[x][1]
         elif list[player_x + key[x][0]][player_y + key[x][1]] == "O":
-            
+            npc.host()
         elif list[player_x + key[x][0]][player_y + key[x][1]] == "B":
 
         elif list[player_x + key[x][0]][player_y + key[x][1]] == chr(216):
