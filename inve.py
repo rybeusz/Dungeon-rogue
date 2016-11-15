@@ -1,18 +1,26 @@
 def display_inventory(inventory):
     """prints keys and values of inventory"""
+    weight = []
     print('Inventory:')
     for key, value in inventory.items():
-        print('{} {}'.format(value, key))
-    print('Total number of items: {}'.format(sum(inventory.values())))
+        print('{} {}'.format(value[0], key))
+    for value in inventory.values():
+        weight.append(value[0])
+
+    print('Total number of items: {}'.format(sum(weight)))
 
 
 def add_to_inventory(inventory, loot):
     """ adding items from lists to inventory"""
+    #loot = [['gold coin', 'other'], ['dagger', 'weapon'], ['gold coin', 'other'], ['gold coin', 'other'], ['ruby', 'other']]
+    #inv = {'rope': [1, 'other'], 'torch': [6,'other'], 'gold coin': [42, 'other'], 'dagger': [1,'weapon'],
+    #       'arrow': [12, 'weapon']}
+    #backpack[items[0][0]].append(items[0][1])
     for item in loot:
-        if item in inventory.keys():
-            inventory[item] += 1
+        if item[0] in inventory.keys():
+            inventory[item[0]][0] += 1
         else:
-            inventory[item] = 1
+            inventory[item[0]] = [1, item[1]]
     return inventory
 
 
@@ -20,14 +28,6 @@ def print_table(inventory, order=None):
     """print inventory in order or no"""
     list_of_len = [len('{:>6} {:>12}'.format(value, key)) for key, value in inventory.items()]
     max_len = max(list_of_len)
-    if order is None:
-        print('Inventory:')
-        print("{:>6} {:>12}".format('count', 'item name'))
-        print('-' * max_len)
-        for key, value in inventory.items():
-            print('{:>6} {:>12}'.format(value, key))
-        print('-' * max_len)
-        print('Total number of items: {}'.format(sum(inventory.values())))
     elif order == 'count,desc':
         sorted_dict = sorted(inventory.items(), key=lambda index: index[1], reverse=True)  # sort by value
         print('Inventory:')
@@ -90,26 +90,12 @@ def export_inventory(inventory, filename='export_inventory.csv'):
 
 def main():
     """check all def"""
-    inv = {'rope': 1, 'torch': 6, 'gold coin': 42, 'dagger': 1, 'arrow': 12}
-    loot = ['gold coin', 'dagger', 'gold coin', 'gold coin', 'ruby']
+    inv = {'rope': [1, 'other'], 'torch': [6,'other'], 'gold coin': [42, 'other'], 'dagger': [1,'weapon'],
+           'arrow': [12, 'weapon']}
+    loot = [['gold coin', 'other'], ['dagger', 'weapon'], ['gold coin', 'other'], ['gold coin', 'other'], ['ruby', 'other']]
     display_inventory(inv)
-    print('\n'*4 + 'Add loot to inventory.')
-    inv = add_to_inventory(inv, loot)
+    add_to_inventory(inv, loot)
     display_inventory(inv)
-    print('\n' + 'Show inventory.\n')
-    display_inventory(inv)
-    print('\n'*4 + 'Print inventory in orders.\n')
-    print_table(inv)
-    print('\n')
-    print_table(inv, 'count,desc')
-    print('\n')
-    print_table(inv, 'count,asc')
-    print('\n'*4 + 'Import inventory.\n')
-    import_inventory(inv)
-    display_inventory(inv)
-    print('Export inventory\n')
-    export_inventory(inv)
-
-
+    print(inv)
 if __name__ == '__main__':
     main()
