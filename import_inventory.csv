@@ -1,6 +1,6 @@
-gold coin,45
-torch,6
-ruby,4.0
-arrow,12
-rope,13.0
-dagger,2
+gold coin,45,other,45
+torch,6,other,12
+ruby,4,other,4
+arrow,12,other,12
+rope,13,other,13
+dagger,2,weapon,4
