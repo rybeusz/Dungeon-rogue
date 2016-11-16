@@ -21,6 +21,7 @@ def board(x, y, player_x, player_y):
 
 
 def show_board(list):
+    """Just show board"""
     for i in list:
         print(''.join(i))
 
@@ -40,6 +41,7 @@ def random_item(list):
 
 
 def random_buildings(game_board, level):
+    """Displaying buildings in random areas"""
     random_area = [random.randrange(0, 11, 10), random.randrange(0, 31, 30)]
     if level == 1:
         x = random_area[1]
@@ -88,20 +90,50 @@ def random_buildings(game_board, level):
     return game_board
 
 
+def intro(level):
+    """Printing intro before each level"""
+    os.system('clear')
+    print("\nLEVEL ",level)
+    if level == 1:
+        print("""
+        You are a drunkard farmer. Last night
+        you drank too much. You don't know what is going on.
+        Talk to host if you want know what is your name.
+        Good luck!
+        """)
+    elif level == 2:
+        print("""
+        After you get all your clothes you go to your farm.
+        From a distance you hear the voice of your wife.
+        You have bad feelings...
+        """)
+    elif level == 3:
+        print("""
+        It's time to sell your harvest. You go to city
+        and you see two buildings, in one of them is merchant.
+        Talk to him.
+        """)
+    input("Click anything to continue")
+
+
 def levels(level):
+    """Level inizialization"""
     inventory = 0
     if level == 1:
+        intro(level)
         player_x = 3
         player_y = 3
         game_board = board(20, 60, player_x, player_y)
         game_board = random_buildings(game_board, level)
         game_board = random_item(game_board)
     if level == 2:
+        intro(level)
         player_x = 1
         player_y = 1
         game_board = board(20, 60, player_x, player_y)
         game_board = random_buildings(game_board, level)
     if level == 3:
+        intro(level)
         player_x = 3
         player_y = 3
         game_board = board(20, 60, player_x, player_y)
@@ -121,22 +153,44 @@ def levels(level):
 def fun_effectwow():
     """Special effect"""
     f = open("effect.txt", 'r')
-    colorlist = ["red", "green", "yellow", "blue", "magenta", "cyan", "white"]
+    colorlist = ("red", "green", "yellow", "blue", "magenta", "cyan", "white")
     effect_list = [line[:-1] for line in f]
     f.close()
-    for i in range(len(effect_list[0])):
+    maxlen = len(effect_list[0])
+    for i in range(round(maxlen/2)):
         os.system('clear')
-        for x in range(len(effect_list)):
-            cprint(effect_list[x][:i], random.choice(colorlist))
-        time.sleep(0.02)
+        for z in range(len(effect_list)):
+            cprint(effect_list[z][:i+3] + (" " * ((maxlen-i*2)-3)) + effect_list[z][maxlen-i:],
+            random.choice(colorlist))
+        time.sleep(0.05)
 
 
 def main():
-    fun_effectwow()
-    #levels(1)
-    #levels(2)
-    #levels(3)
-    input()
+    """Main function"""
+    while True:
+        os.system('clear')
+        fun_effectwow()
+        cprint("\n▁▂▄▅▆▇█ FARMER GAME █▇▆▅▄▂▁", 'yellow')
+        print("\n1. PLAY\n2. HELP\n3. QUIT\n")
+        user_choice = input("You pick: ")
+        if user_choice == "1":
+            levels(1)
+            levels(2)
+            levels(3)
+        elif user_choice == "2":
+            os.system('clear')
+            print("""\nHELP PAGE
+
+        Use W,A,S,D keys to control your hero.
+        Press E to talk.
+        Go on item to take it.
+            """)
+            input("Click anything to continue")
+        elif user_choice == "3":
+            quit()
+        else:
+            print("Wrong command")
+            input()
 
 
 if __name__ == "__main__":
