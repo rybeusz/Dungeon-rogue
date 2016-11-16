@@ -23,6 +23,7 @@ def menel(backpack):
 
     else:
         print("elo")
+    return backpack
 
 
 def host2(backpack, name):
@@ -63,8 +64,11 @@ def trader(backpack):
             print("ur answer need to be yes or no ")
     else:
         print("You dont have any corn come when u get some ")
+    return backpack
 
 
 def boss(backpack):
-    if "vodka" not in backpack:
+    if "vodka" in backpack:
         guess.main()
+    else:
+        print("u need to have a vodka to play with me! ")
