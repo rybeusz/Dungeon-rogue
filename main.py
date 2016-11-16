@@ -3,6 +3,7 @@ from move import *
 import random
 import time
 from termcolor import cprint
+import inve
 
 
 def board(x, y, player_x, player_y):
@@ -124,6 +125,7 @@ def levels(level, inventory, player_x=3, player_y=3):
     while True:
         os.system('clear')
         show_board(game_board)
+        inve.print_table(inventory)
         move_variables = movement(game_board, player_x, player_y, inventory)
         game_board = move_variables[0]
         player_x = move_variables[1]

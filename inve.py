@@ -43,22 +43,23 @@ def add_to_inventory(inventory, loot):
 
 def print_table(inventory):
     """print backpack in order"""
-    amount = []
-    weight = []
-    for value in inventory.values():
-        amount.append(value[0])
-        weight.append(value[2])
-    list_of_len = [len('{:>12} {:>7} {:>7}'.format(key, value[0], value[2])) for key, value in inventory.items()]
-    max_len = max(list_of_len)
-    sorted_dict = sorted(inventory.items(), key=lambda index: index[1], reverse=True)  # sort by amount
-    print('Inventory:')
-    print('{:>12} {:>7} {:>7}'.format('item name', 'amount', 'weight'))
-    print('-' * max_len)
-    for key, value in sorted_dict:
-        print('{:>12} {:>7} {:>7}'.format(key, value[0], value[2]))
-    print('-' * max_len)
-    print('Total number of items: {}'.format(sum(amount)))
-    print('Total weight: {}'.format(sum(weight)))
+    if inventory:
+        amount = []
+        weight = []
+        for value in inventory.values():
+            amount.append(value[0])
+            weight.append(value[2])
+        list_of_len = [len('{:>12} {:>7} {:>7}'.format(key, value[0], value[2])) for key, value in inventory.items()]
+        max_len = max(list_of_len)
+        sorted_dict = sorted(inventory.items(), key=lambda index: index[1], reverse=True)  # sort by amount
+        print('Inventory:')
+        print('{:>12} {:>7} {:>7}'.format('item name', 'amount', 'weight'))
+        print('-' * max_len)
+        for key, value in sorted_dict:
+            print('{:>12} {:>7} {:>7}'.format(key, value[0], value[2]))
+        print('-' * max_len)
+        print('Total number of items: {}'.format(sum(amount)))
+        print('Total weight: {}'.format(sum(weight)))
 
 
 def fastsplit(line):
