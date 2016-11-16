@@ -17,6 +17,19 @@ def display_inventory(inventory):
     print('Total number of items: {}'.format(sum(amount)))
 
 
+def remove_item(inventory, loot, amount):
+    amoun = amount
+    while amoun > 0:
+        for item in loot:
+            if item[0] in inventory.keys():
+                inventory[item[0]][0] -= 1
+                inventory[item[0]][2] -= item[2]
+                amoun -= 1
+            else:
+                pass
+    return inventory
+
+
 def add_to_inventory(inventory, loot):
     """ adding items from lists to inventory"""
     for item in loot:
@@ -68,7 +81,13 @@ def export_inventory(inventory, filename='export_inventory.csv'):
     """export data to file"""
     export_file = open(filename, 'w+')
     for key, value in inventory.items():
-            export_file.write('{},{},{},{}\n'.format(key, value[0],value[1],value[2]))
+        export_file.write('{},{},{},{}\n'.format(key, value[0], value[1], value[2]))
+
+
+# create bag of secret items in def to call from module
+def random_items():
+    pass
+
 
 def main():
     """check all def"""
@@ -77,31 +96,22 @@ def main():
            'arrow': [12, 'weapon', 12]}
     loot = [['gold coin', 'other', 1], ['dagger', 'weapon', 2], ['gold coin', 'other', 1], ['gold coin', 'other', 1],
             ['ruby', 'other', 1]]
-    # display_inventory(inv)
-    # add_to_inventory(inv, loot)
-    # display_inventory(inv)
-    print(inv)
+    loot2 = [['rope', 'other', 1]]
+    # inv = {}
+    # print(inv)
+    # import_inventory(inv,'export_inventory.csv')
     # print_table(inv)
-    #import_inventory(inv, 'import_inventory.csv')
-
-# create bag of secret items in def to call from module
-def random_items():
-    pass
-
-def main():
-    """check all def"""
-    #inv = {'rope': [1, 'other', 12], 'torch': [6, 'other', 12], 'gold coin': [42, 'other', 42],
-          # 'dagger': [1, 'weapon', 2],
-           #'arrow': [12, 'weapon', 12]}
-    loot = [['gold coin', 'other', 1], ['dagger', 'weapon', 2], ['gold coin', 'other', 1], ['gold coin', 'other', 1],
-            ['ruby', 'other', 1]]
-    inv = {}
-    print(inv)
-    import_inventory(inv,'export_inventory.csv')
+    # display_inventory(inv)
+    # export_inventory(inv)
+    while inv['rope'][0] < 7:
+        print('more rope!')
+        add_to_inventory(inv, loot2)
+        print_table(inv)
+    remove_item(inv,loot2,4)
     print_table(inv)
-    display_inventory(inv)
-    export_inventory(inv)
-
-
+    if 'wheat' not in inv:
+        print('elo')
+    else:
+        print('no wheat')
 if __name__ == '__main__':
     main()
