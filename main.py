@@ -21,6 +21,7 @@ def board(x, y, player_x, player_y):
 
 
 def show_board(list):
+    """Just show board"""
     for i in list:
         print(''.join(i))
 
@@ -40,6 +41,7 @@ def random_item(list):
 
 
 def random_buildings(game_board, level):
+    """Displaying buildings in random areas"""
     random_area = [random.randrange(0, 11, 10), random.randrange(0, 31, 30)]
     if level == 1:
         x = random_area[1]
@@ -89,6 +91,7 @@ def random_buildings(game_board, level):
 
 
 def intro(level):
+    """Printing intro before each level"""
     os.system('clear')
     print("\nLEVEL ",level)
     if level == 1:
@@ -114,6 +117,7 @@ def intro(level):
 
 
 def levels(level):
+    """Level inizialization"""
     inventory = 0
     if level == 1:
         intro(level)
@@ -162,6 +166,7 @@ def fun_effectwow():
 
 
 def main():
+    """Main function"""
     while True:
         os.system('clear')
         fun_effectwow()
