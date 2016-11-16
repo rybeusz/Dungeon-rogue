@@ -7,55 +7,57 @@ from termcolor import cprint
 
 def board(x, y, player_x, player_y):
     """Create a board"""
-    list = []
-
+    game_board = []
     for row in range(x):
-        list.append([])
+        game_board.append([])
         for column in range(y):
             if row == 0 or row == x - 1 or column == 0 or column == y - 1:
-                list[row].append('#')
+                game_board[row].append('#')
             else:
-                list[row].append('.')
-    list[player_x][player_y] = '@'
-    return list
+                game_board[row].append('.')
+    game_board[player_x][player_y] = '@'
+    return game_board
 
 
-def show_board(list):
+def show_board(game_board):
     """Just show board"""
-    for i in list:
+    for i in game_board:
         print(''.join(i))
 
 
-def random_item(list):
+def random_item(game_board):
     i = 0
     items = ['a', 'b', 'c', 'd', 'e']
     while True:
         x = random.randrange(19)
         y = random.randrange(59)
-        if list[x][y] == '.':
-            list[x][y] = items[i]
+        if game_board[x][y] == '.':
+            game_board[x][y] = items[i]
             i += 1
         if i == 5:
             break
-    return list
+    return game_board
+
+
+def generate_build(game_board, x, y,build_pos):
+    for i in range(y+3, y+8):
+        for z in range(x+7, x+19):
+            if i == y+3 or i == y+7 or z == x+7 or z == x+18:
+                game_board[i][z] = '#'
+    return game_board
 
 
 def random_buildings(game_board, level):
     """Displaying buildings in random areas"""
     random_area = [random.randrange(0, 11, 10), random.randrange(0, 31, 30)]
+    x = random_area[1]
+    y = random_area[0]
     if level == 1:
-        x = random_area[1]
-        y = random_area[0]
-        for i in range(y+3, y+8):
-            for z in range(x+7, x+19):
-                if i == y+3 or i == y+7 or z == x+7 or z == x+18:
-                    game_board[i][z] = '#'
+        game_board = generate_build(game_board, x, y, [[3, 8], [7, 19]])
         game_board[y+7][x+5+7] = '.'  # tavern doors
         game_board[y+7][x+6+7] = '.'  # tavern doors
         game_board[y+4][x+5+7] = 'O'  # tavern man
     if level == 2:
-        x = random_area[1]
-        y = random_area[0]
         for i in range(y+4, y+8):
             for z in range(x+4, x+19):
                 if i == y+4 or i == y+7 or z == x+4 or z == x+18:
@@ -67,18 +69,15 @@ def random_buildings(game_board, level):
             y = random.randrange(0, 11, 10)
         for i in range(y+2, y+8):  # wheat  generating
             for z in range(x+3, x+27):
-                    game_board[i][z] = chr(182)#'/'
-
+                    game_board[i][z] = chr(182)
     if level == 3:
-        x = random_area[1]
-        y = random_area[0]
         for i in range(y+3, y+8):
             for z in range(x+9, x+17):
                 if i == y+3 or i == y+7 or z == x+9 or z == x+16:
                     game_board[i][z] = '#'
         game_board[y+7][x+5+7] = '.'
         game_board[y+7][x+6+7] = '.'
-        game_board[y+4][x+5+7] = chr(216) # boss
+        game_board[y+4][x+5+7] = chr(216)  # boss
         while x == random_area[1] and y == random_area[0]:  # random area for new build
             x = random.randrange(0, 31, 30)
             y = random.randrange(0, 11, 10)
@@ -93,7 +92,7 @@ def random_buildings(game_board, level):
 def intro(level):
     """Printing intro before each level"""
     os.system('clear')
-    print("\nLEVEL ",level)
+    print("\nLEVEL ", level)
     if level == 1:
         print("""
         You are a drunkard farmer. Last night
@@ -116,30 +115,13 @@ def intro(level):
     input("Click anything to continue")
 
 
-def levels(level):
+def levels(level, player_x=3, player_y=3):
     """Level inizialization"""
-    inventory = 0
-    if level == 1:
-        intro(level)
-        player_x = 3
-        player_y = 3
-        game_board = board(20, 60, player_x, player_y)
-        game_board = random_buildings(game_board, level)
-        game_board = random_item(game_board)
-    if level == 2:
-        intro(level)
-        player_x = 1
-        player_y = 1
-        game_board = board(20, 60, player_x, player_y)
-        game_board = random_buildings(game_board, level)
-    if level == 3:
-        intro(level)
-        player_x = 3
-        player_y = 3
-        game_board = board(20, 60, player_x, player_y)
-        game_board = random_buildings(game_board, level)
-        game_board = random_item(game_board)
-
+    inventory = 0  # to remove
+    intro(level)
+    game_board = board(20, 60, player_x, player_y)
+    game_board = random_buildings(game_board, level)
+    game_board = random_item(game_board)
     while True:
         os.system('clear')
         show_board(game_board)
@@ -148,6 +130,8 @@ def levels(level):
         player_x = move_variables[1]
         player_y = move_variables[2]
         inventory = move_variables[3]
+        if player_x == 1:
+            break
 
 
 def fun_effectwow():
@@ -175,7 +159,7 @@ def main():
         user_choice = input("You pick: ")
         if user_choice == "1":
             levels(1)
-            levels(2)
+            levels(2)  # 1/1
             levels(3)
         elif user_choice == "2":
             os.system('clear')
