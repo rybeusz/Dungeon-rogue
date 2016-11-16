@@ -37,7 +37,7 @@ def print_table(inventory):
         weight.append(value[2])
     list_of_len = [len('{:>12} {:>7} {:>7}'.format(key, value[0], value[2])) for key, value in inventory.items()]
     max_len = max(list_of_len)
-    sorted_dict = sorted(inventory.items(), key=lambda index: index[1], reverse=True)  # sort by value
+    sorted_dict = sorted(inventory.items(), key=lambda index: index[1], reverse=True)  # sort by amount
     print('Inventory:')
     print('{:>12} {:>7} {:>7}'.format('item name', 'amount', 'weight'))
     print('-' * max_len)
@@ -83,6 +83,22 @@ def main():
     print(inv)
     # print_table(inv)
     #import_inventory(inv, 'import_inventory.csv')
+
+# create bag of secret items in def to call from module
+def random_items():
+    pass
+
+def main():
+    """check all def"""
+    #inv = {'rope': [1, 'other', 12], 'torch': [6, 'other', 12], 'gold coin': [42, 'other', 42],
+          # 'dagger': [1, 'weapon', 2],
+           #'arrow': [12, 'weapon', 12]}
+    loot = [['gold coin', 'other', 1], ['dagger', 'weapon', 2], ['gold coin', 'other', 1], ['gold coin', 'other', 1],
+            ['ruby', 'other', 1]]
+    inv = {}
+    print(inv)
+    import_inventory(inv,'export_inventory.csv')
+    print_table(inv)
     display_inventory(inv)
     export_inventory(inv)
 
