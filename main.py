@@ -88,20 +88,48 @@ def random_buildings(game_board, level):
     return game_board
 
 
+def intro(level):
+    os.system('clear')
+    print("\nLEVEL ",level)
+    if level == 1:
+        print("""
+        You are a drunkard farmer. Last night
+        you drank too much. You don't know what is going on.
+        Talk to host if you want know what is your name.
+        Good luck!
+        """)
+    elif level == 2:
+        print("""
+        After you get all your clothes you go to your farm.
+        From a distance you hear the voice of your wife.
+        You have bad feelings...
+        """)
+    elif level == 3:
+        print("""
+        It's time to sell your harvest. You go to city
+        and you see two buildings, in one of them is shopkeeper.
+        Talk to him.
+        """)
+    input("Click anything to continue")
+
+
 def levels(level):
     inventory = 0
     if level == 1:
+        intro(level)
         player_x = 3
         player_y = 3
         game_board = board(20, 60, player_x, player_y)
         game_board = random_buildings(game_board, level)
         game_board = random_item(game_board)
     if level == 2:
+        intro(level)
         player_x = 1
         player_y = 1
         game_board = board(20, 60, player_x, player_y)
         game_board = random_buildings(game_board, level)
     if level == 3:
+        intro(level)
         player_x = 3
         player_y = 3
         game_board = board(20, 60, player_x, player_y)
@@ -124,19 +152,32 @@ def fun_effectwow():
     colorlist = ["red", "green", "yellow", "blue", "magenta", "cyan", "white"]
     effect_list = [line[:-1] for line in f]
     f.close()
-    for i in range(len(effect_list[0])):
+    maxlen = len(effect_list[0])
+    for i in range(round(maxlen/2)+2):
         os.system('clear')
-        for x in range(len(effect_list)):
-            cprint(effect_list[x][:i], random.choice(colorlist))
-        time.sleep(0.02)
+        for z in range(len(effect_list)):
+            cprint(effect_list[z][:i] + (" " * (maxlen-i*2)) + effect_list[z][maxlen-i:], random.choice(colorlist))
+        time.sleep(0.05)
 
 
 def main():
-    fun_effectwow()
-    #levels(1)
-    #levels(2)
-    #levels(3)
-    input()
+    while True:
+        os.system('clear')
+        fun_effectwow()
+        print("\n▁▂▄▅▆▇█ FARMER GAME █▇▆▅▄▂▁\n\n1. PLAY\n2. HELP\n3. QUIT\n")
+        user_choice = input("You pick: ")
+        if user_choice == "1":
+            levels(1)
+            levels(2)
+            levels(3)
+        elif user_choice == "2":
+            print("May the force be with you")
+            input()
+        elif user_choice == "3":
+            quit()
+        else:
+            print("Wrong command")
+            input()
 
 
 if __name__ == "__main__":
