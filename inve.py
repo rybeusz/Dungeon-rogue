@@ -54,10 +54,10 @@ def print_table(inventory):
         sorted_dict = sorted(inventory.items(), key=lambda index: index[1], reverse=True)  # sort by amount
         print('Inventory:')
         print('{:>12} {:>7} {:>7}'.format('item name', 'amount', 'weight'))
-        print('-' * max_len)
+        print('*' * max_len)
         for key, value in sorted_dict:
             print('{:>12} {:>7} {:>7}'.format(key, value[0], value[2]))
-        print('-' * max_len)
+        print('*' * max_len)
         print('Total number of items: {}'.format(sum(amount)))
         print('Total weight: {}'.format(sum(weight)))
 
