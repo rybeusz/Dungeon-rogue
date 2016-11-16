@@ -13,7 +13,7 @@ def board(x, y, player_x, player_y):
         game_board.append([])
         for column in range(y):
             if row == 0 or row == x - 1 or column == 0 or column == y - 1:
-                game_board[row].append('#')
+                game_board[row].append('█')
             else:
                 game_board[row].append('.')
     game_board[player_x][player_y] = '@'
@@ -44,7 +44,7 @@ def generate_build(game_board, x, y,build_pos):
     for i in range(y+3, y+8):
         for z in range(x+7, x+19):
             if i == y+3 or i == y+7 or z == x+7 or z == x+18:
-                game_board[i][z] = '#'
+                game_board[i][z] = '█'
     return game_board
 
 
