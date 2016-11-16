@@ -1,9 +1,9 @@
 import inve
 import guess
-boss = "!"
-wife = "B"
-host = "O"
-menel = "&"
+
+
+def enter():
+    input("\nClick Enter to continue ")
 
 
 def menel(backpack):
@@ -26,13 +26,15 @@ def menel(backpack):
     return backpack
 
 
-def host2(backpack, name):
+def host2(backpack, name="Mariusz"):
     namei = str(name)
+    text = ''
     if "clothes" not in backpack:
         print("{} dress up".format(namei))
+        enter()
     else:
         print("U look like a badass ")
-
+        enter()
 
 def wife2(backpack):  # ogarnąć ta ku.... tylko pierwsze podejsice
     if "scythe" and "corn" in backpack:

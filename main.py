@@ -115,9 +115,8 @@ def intro(level):
     input("Click anything to continue")
 
 
-def levels(level, player_x=3, player_y=3):
+def levels(level, inventory, player_x=3, player_y=3):
     """Level inizialization"""
-    inventory = 0  # to remove
     intro(level)
     game_board = board(20, 60, player_x, player_y)
     game_board = random_buildings(game_board, level)
@@ -151,6 +150,7 @@ def fun_effectwow():
 
 def main():
     """Main function"""
+    inventory = {}
     while True:
         os.system('clear')
         fun_effectwow()
@@ -158,9 +158,9 @@ def main():
         print("\n1. PLAY\n2. HELP\n3. QUIT\n")
         user_choice = input("You pick: ")
         if user_choice == "1":
-            levels(1)
-            levels(2)  # 1/1
-            levels(3)
+            levels(1, inventory)
+            levels(2, inventory)  # 1/1
+            levels(3, inventory)
         elif user_choice == "2":
             os.system('clear')
             print("""\nHELP PAGE
