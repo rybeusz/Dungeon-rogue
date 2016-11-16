@@ -107,7 +107,7 @@ def intro(level):
     elif level == 3:
         print("""
         It's time to sell your harvest. You go to city
-        and you see two buildings, in one of them is shopkeeper.
+        and you see two buildings, in one of them is merchant.
         Talk to him.
         """)
     input("Click anything to continue")
@@ -149,14 +149,15 @@ def levels(level):
 def fun_effectwow():
     """Special effect"""
     f = open("effect.txt", 'r')
-    colorlist = ["red", "green", "yellow", "blue", "magenta", "cyan", "white"]
+    colorlist = ("red", "green", "yellow", "blue", "magenta", "cyan", "white")
     effect_list = [line[:-1] for line in f]
     f.close()
     maxlen = len(effect_list[0])
-    for i in range(round(maxlen/2)+2):
+    for i in range(round(maxlen/2)):
         os.system('clear')
         for z in range(len(effect_list)):
-            cprint(effect_list[z][:i] + (" " * (maxlen-i*2)) + effect_list[z][maxlen-i:], random.choice(colorlist))
+            cprint(effect_list[z][:i+3] + (" " * ((maxlen-i*2)-3)) + effect_list[z][maxlen-i:],
+            random.choice(colorlist))
         time.sleep(0.05)
 
 
@@ -164,15 +165,22 @@ def main():
     while True:
         os.system('clear')
         fun_effectwow()
-        print("\n▁▂▄▅▆▇█ FARMER GAME █▇▆▅▄▂▁\n\n1. PLAY\n2. HELP\n3. QUIT\n")
+        cprint("\n▁▂▄▅▆▇█ FARMER GAME █▇▆▅▄▂▁", 'yellow')
+        print("\n1. PLAY\n2. HELP\n3. QUIT\n")
         user_choice = input("You pick: ")
         if user_choice == "1":
             levels(1)
             levels(2)
             levels(3)
         elif user_choice == "2":
-            print("May the force be with you")
-            input()
+            os.system('clear')
+            print("""\nHELP PAGE
+
+        Use W,A,S,D keys to control your hero.
+        Press E to talk.
+        Go on item to take it.
+            """)
+            input("Click anything to continue")
         elif user_choice == "3":
             quit()
         else:
