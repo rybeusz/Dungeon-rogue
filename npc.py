@@ -10,13 +10,13 @@ def bum(backpack):
     loot = [["vodka", "food", 1]]
     loot2 = [["gold coin", "other", 1]]
     if "gold coin" in backpack:
-        if backpack['gold coin'][0] > 10:
+        if backpack['gold coin'][0] >= 10:
             print("Bum say: ")
             vodka_sell = input("Wanna change 1 gold coins for 1 vodka?\n(write yes to accept or no for reject) ")
             if vodka_sell == "yes":
                 try:
                     vodka_ask = int(input("How much vodka u need? "))
-                    if vodka_ask < backpack["gold coin"][0]:
+                    if vodka_ask <= backpack["gold coin"][0]:
                         print("Bum say: ")
                         print("GLUP ")
                         inve.remove_item(backpack, loot2, vodka_ask)
@@ -63,7 +63,7 @@ def host(backpack, name="Mariusz"):
 
 def wife(backpack):
     if "corn" in backpack:
-        if backpack['corn'][0] < 20:
+        if backpack['corn'][0] <= 20:
             print("Wife say: ")
             print("You need to gather 20 corn cob so get back to work! ")
             enter()
