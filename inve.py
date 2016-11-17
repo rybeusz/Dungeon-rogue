@@ -38,15 +38,17 @@ def remove_item(inventory, loot, amount):
     return inventory
 
 
-def add_to_inventory(inventory, loot):
+def add_to_inventory(inventory, loot, amount):
     """ adding items from lists to inventory"""
-    for item in loot:
-        if item[0] in inventory.keys():
-            inventory[item[0]][0] += 1  # amount
-            inventory[item[0]][2] += item[2]  # weight
-        else:
-            inventory[item[0]] = [1, item[1], item[2]]
-    return inventory
+    amoun = amount
+    while amoun >0:
+        for item in loot:
+            if item[0] in inventory.keys():
+                inventory[item[0]][0] += 1  # amount
+                inventory[item[0]][2] += item[2]  # weight
+            else:
+                inventory[item[0]] = [1, item[1], item[2]]
+        return inventory
 
 
 def print_table(inventory):
