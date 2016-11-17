@@ -154,7 +154,7 @@ def main():
         user_choice = input("You pick: ")
         if user_choice == "1":
             levels(1, inventory)
-            levels(2, inventory)  # 1/1
+            levels(2, inventory,1,2)  # 1/1
             levels(3, inventory)
         elif user_choice == "2":
             os.system('clear')

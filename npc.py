@@ -7,13 +7,14 @@ def enter():
 
 
 def menel(backpack):
-    loot = [["vodka", "food", 1], ["gold coin", "other", 1]]
+    loot = [["vodka", "food", 1]]
+    loot2 = [["gold coin", "other", 1]]
     if "gold coin" in backpack:
         if backpack['gold coin'][0] > 10:
             vodka_sell = input("Wanna change 10 gold coins for 1 vodka? / write yes to accept or no for reject")
             if vodka_sell == "yes":
-                inve.remove_item(backpack, loot[1], 10)
-                inve.add_to_inventory(backpack, loot[0], 1)
+                inve.remove_item(backpack, loot2, 10)
+                inve.add_to_inventory(backpack, loot, 1)
             if vodka_sell == "no":
                 print("bye come to papa again :0 ")
                 enter()
@@ -39,7 +40,7 @@ def host2(backpack, name="Mariusz"):
         enter()
 
 def wife2(backpack):  # ogarnąć ta ku.... tylko pierwsze podejsice
-    if "scythe" and "corn" in backpack:
+    if "corn" in backpack:
         if backpack['corn'][0] < 20:
             print("You need to gather 20 corn cob so get back to work! ")
             enter()
@@ -55,7 +56,8 @@ def wife1(backpack):
 
 
 def trader(backpack):
-    loot = [["gold coin", "other", 1], ["corn", "food", 1]]
+    loot = [["gold coin", "other", 1]]
+    loot2 = [["corn", "food", 1]]
     if "corn" in backpack:
         x = input("Do u wanna sell some corn mate?\n write yes or no: ")
         x = x.lower()
@@ -65,8 +67,8 @@ def trader(backpack):
                 print("u dont have that much corn in ur backpack ")
                 enter()
             else:
-                inve.remove_item(backpack, loot[1], remove_corn)
-                inve.add_to_inventory(backpack, loot[0], remove_corn)
+                inve.remove_item(backpack, loot2, remove_corn)
+                inve.add_to_inventory(backpack, loot, remove_corn)
         elif x == "no":
             print("Come to me when u wanna sell corn ")
             enter()
