@@ -35,6 +35,20 @@ def boss_pic():
         time.sleep(0.05)
 
 
+def titanic_pic():
+    f = open("titanic.txt", 'r')
+    colorlist = ("blue", "magenta", "white")
+    effect_list = [line[:-1] for line in f]
+    f.close()
+    maxlen = len(effect_list[0])
+    for i in range(round(maxlen / 2)):
+        os.system('clear')
+        for z in range(len(effect_list)):
+            cprint(effect_list[z][:i + 3] + (" " * ((maxlen - i * 2) - 3)) + effect_list[z][maxlen - i:],
+                   random.choice(colorlist))
+        time.sleep(0.2)
+
+
 def main(vodka):
     """start game with amount of vodka in your backpack"""
     os.system('clear')
@@ -54,7 +68,9 @@ def main(vodka):
                     print("\033[93m {}\033[00m".format('warm'), end=' ')
             if user == drawn:
                 print('\x1b[10;33;41m'+ '\nYou win titanic ticket nice!' + '\x1b[0m')
+                titanic_pic()
                 quit()
+
         else:
             print("\033[94m {}\033[00m".format('cold'), end=' ')
 

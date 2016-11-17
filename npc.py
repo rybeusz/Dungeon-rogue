@@ -123,7 +123,7 @@ def boss(backpack):
         print("Lets play!!!!! ")
         guess.main(backpack["vodka"][0])
         inve.remove_item(backpack, loot, backpack["vodka"][0])
-        enter()
+        input("\033[94m" + "\nGo away and never go back when you  still got a chance." + "\033[00m")
 
     else:
         print("Boss say: ")

@@ -41,9 +41,9 @@ def random_item(game_board, items):
 
 def generate_build(game_board, x, y, bpY, bpX):
     """Creating buildings"""
-    for i in range(y+bpY[0], y+bpY[1]):
-        for z in range(x+bpX[0], x+bpX[1]):
-            if i == y+bpY[0] or i == y+bpY[1]-1 or z == x+bpX[0] or z == x+bpX[1]-1:
+    for i in range(y + bpY[0], y + bpY[1]):
+        for z in range(x + bpX[0], x + bpX[1]):
+            if i == y + bpY[0] or i == y + bpY[1] - 1 or z == x + bpX[0] or z == x + bpX[1] - 1:
                 game_board[i][z] = '█'
     return game_board
 
@@ -55,31 +55,31 @@ def random_buildings(game_board, level):
     y = random_area[0]
     if level == 1:
         game_board = generate_build(game_board, x, y, [3, 8], [7, 19])
-        game_board[y+7][x+5+7] = '.'  # tavern doors
-        game_board[y+7][x+6+7] = '.'  # tavern doors
-        game_board[y+4][x+5+7] = 'O'  # tavern man
+        game_board[y + 7][x + 5 + 7] = '.'  # tavern doors
+        game_board[y + 7][x + 6 + 7] = '.'  # tavern doors
+        game_board[y + 4][x + 5 + 7] = 'O'  # tavern man
         game_board = random_item(game_board, ['a', 'b', 'c', 'd', 'e'])  # clothes
     if level == 2:
         game_board = generate_build(game_board, x, y, [3, 8], [4, 19])
-        game_board[y+7-1][x+4] = '.'
-        game_board[y+5][x+9+7] = '❤'  # farmer wife
+        game_board[y + 7 - 1][x + 4] = '.'
+        game_board[y + 5][x + 9 + 7] = '❤'  # farmer wife
         while x == random_area[1] and y == random_area[0]:  # random area for corn
             x = random.randrange(0, 31, 30)
             y = random.randrange(0, 11, 10)
-        for i in range(y+2, y+8):  # corn  generating
-            for z in range(x+3, x+27):
-                    game_board[i][z] = chr(182)
+        for i in range(y + 2, y + 8):  # corn  generating
+            for z in range(x + 3, x + 27):
+                game_board[i][z] = chr(182)
     if level == 3:
         game_board = generate_build(game_board, x, y, [3, 8], [9, 17])
-        game_board[y+7][x+5+7] = '.'
-        game_board[y+7][x+6+7] = '.'
-        game_board[y+4][x+5+7] = "☠"  # boss
+        game_board[y + 7][x + 5 + 7] = '.'
+        game_board[y + 7][x + 6 + 7] = '.'
+        game_board[y + 4][x + 5 + 7] = "☠"  # boss
         while x == random_area[1] and y == random_area[0]:  # random area for new build
             x = random.randrange(0, 31, 30)
             y = random.randrange(0, 11, 10)
         game_board = generate_build(game_board, x, y, [2, 7], [8, 18])
-        game_board[y+3][x+8] = '.'
-        game_board[y+5][x+5+7] = '¢'
+        game_board[y + 3][x + 8] = '.'
+        game_board[y + 5][x + 5 + 7] = '¢'
         game_board = random_item(game_board, ["♏"])
     return game_board
 
@@ -135,17 +135,17 @@ def fun_effectwow():
     effect_list = [line[:-1] for line in f]
     f.close()
     maxlen = len(effect_list[0])
-    for i in range(round(maxlen/2)):
+    for i in range(round(maxlen / 2)):
         os.system('clear')
         for z in range(len(effect_list)):
-            cprint(effect_list[z][:i+3] + (" " * ((maxlen-i*2)-3)) + effect_list[z][maxlen-i:],
-            random.choice(colorlist))
+            cprint(effect_list[z][:i + 3] + (" " * ((maxlen - i * 2) - 3)) + effect_list[z][maxlen - i:],
+                   random.choice(colorlist))
         time.sleep(0.05)
 
 
 def main():
     """Main function"""
-    inventory = {'vodka':[1,'food',1]}
+    inventory = {}
     while True:
         os.system('clear')
         fun_effectwow()
@@ -154,7 +154,7 @@ def main():
         user_choice = input("You pick: ")
         if user_choice == "1":
             levels(1, inventory)
-            levels(2, inventory,1,2)  # 1/1
+            levels(2, inventory, 1, 2)  # 1/1
             levels(3, inventory)
         elif user_choice == "2":
             os.system('clear')
