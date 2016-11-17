@@ -13,22 +13,26 @@ def random_number():
     return tuple(random.sample(range(1,10),3))
 
 
-def main():
+def main(vodka):
    # print(random_number())
-    i = 0
+    i = vodka * 2
     drawn = random_number()
     print(drawn)
-    while i < 10:
+    while i > 0:
         user = user_choice()
+        i -= 1
         if set(drawn).intersection(user):
             for z in range(3):
                 if (user[z] in drawn) and (user[z] == drawn[z]):
-                    print('hot', end=' ')
+                    print("\033[91m {}\033[00m".format('hot'), end=' ')
             for f in range(3):
                 if (user[f] in drawn) and (user[f] != drawn[f]):
-                    print('warm', end=' ')
+                    print("\033[93m {}\033[00m".format('warm'), end=' ')
+            if user == drawn:
+                print('\x1b[10;33;41m'+ 'You win!' + '\x1b[0m')
+                quit()
         else:
-            print('cold', end=' ')
+            print("\033[94m {}\033[00m".format('cold'), end=' ')
 
 
 if __name__ == '__main__':
