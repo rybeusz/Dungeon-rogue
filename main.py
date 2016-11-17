@@ -26,21 +26,21 @@ def show_board(game_board):
         print(''.join(i))
 
 
-def random_item(game_board):
+def random_item(game_board, items):
     i = 0
-    items = ['a', 'b', 'c', 'd', 'e']
     while True:
         x = random.randrange(19)
         y = random.randrange(59)
         if game_board[x][y] == '.':
             game_board[x][y] = items[i]
             i += 1
-        if i == 5:
+        if i == len(items):
             break
     return game_board
 
 
-def generate_build(game_board, x, y,bpY,bpX):
+def generate_build(game_board, x, y, bpY, bpX):
+    """Creating buildings"""
     for i in range(y+bpY[0], y+bpY[1]):
         for z in range(x+bpX[0], x+bpX[1]):
             if i == y+bpY[0] or i == y+bpY[1]-1 or z == x+bpX[0] or z == x+bpX[1]-1:
@@ -49,7 +49,7 @@ def generate_build(game_board, x, y,bpY,bpX):
 
 
 def random_buildings(game_board, level):
-    """Displaying buildings in random areas"""
+    """Displaying buildings,corn in random areas"""
     random_area = [random.randrange(0, 11, 10), random.randrange(0, 31, 30)]
     x = random_area[1]
     y = random_area[0]
@@ -58,14 +58,15 @@ def random_buildings(game_board, level):
         game_board[y+7][x+5+7] = '.'  # tavern doors
         game_board[y+7][x+6+7] = '.'  # tavern doors
         game_board[y+4][x+5+7] = 'O'  # tavern man
+        game_board = random_item(game_board, ['a', 'b', 'c', 'd', 'e'])  # clothes
     if level == 2:
         game_board = generate_build(game_board, x, y, [3, 8], [4, 19])
         game_board[y+7-1][x+4] = '.'
         game_board[y+5][x+9+7] = '❤'  # farmer wife
-        while x == random_area[1] and y == random_area[0]:  # random area for wheat
+        while x == random_area[1] and y == random_area[0]:  # random area for corn
             x = random.randrange(0, 31, 30)
             y = random.randrange(0, 11, 10)
-        for i in range(y+2, y+8):  # wheat  generating
+        for i in range(y+2, y+8):  # corn  generating
             for z in range(x+3, x+27):
                     game_board[i][z] = chr(182)
     if level == 3:
@@ -78,6 +79,8 @@ def random_buildings(game_board, level):
             y = random.randrange(0, 11, 10)
         game_board = generate_build(game_board, x, y, [2, 7], [8, 18])
         game_board[y+3][x+8] = '.'
+        game_board[y+5][x+5+7] = '¢'
+        game_board = random_item(game_board, ["♏"])
     return game_board
 
 
@@ -112,7 +115,6 @@ def levels(level, inventory, player_x=3, player_y=3):
     intro(level)
     game_board = board(20, 60, player_x, player_y)
     game_board = random_buildings(game_board, level)
-    game_board = random_item(game_board)
     while True:
         os.system('clear')
         show_board(game_board)
