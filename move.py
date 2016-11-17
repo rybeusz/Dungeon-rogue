@@ -26,8 +26,8 @@ def movement(game_board, player_x, player_y, inv):
             cloth = [['clothes', 'other', 1]]
             inve.add_to_inventory(inv, cloth, 1)
         if pos in ["O", '❤', "☠", "♏", '¢']:  # npc functions
-            npc_dict = {"O": 'host', '❤': 'wife1', "☠": 'boss', "♏": 'bum', '¢': 'trader'}
-            getattr(npc, npc_dict[list[player_x + key[x][0]][player_y + key[x][1]]])(inv)
+            npc_dict = {"O": 'host', '❤': 'wife', "☠": 'boss', "♏": 'bum', '¢': 'trader'}
+            getattr(npc, npc_dict[pos])(inv)
         if pos not in special_char:  # moving
             game_board[player_x][player_y] = "."
             game_board[player_x + key[x][0]][player_y + key[x][1]] = "@"
