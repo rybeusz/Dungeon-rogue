@@ -40,10 +40,10 @@ def random_item(game_board):
     return game_board
 
 
-def generate_build(game_board, x, y,build_pos):
-    for i in range(y+3, y+8):
-        for z in range(x+7, x+19):
-            if i == y+3 or i == y+7 or z == x+7 or z == x+18:
+def generate_build(game_board, x, y,bpY,bpX):
+    for i in range(y+bpY[0], y+bpY[1]):
+        for z in range(x+bpX[0], x+bpX[1]):
+            if i == y+bpY[0] or i == y+bpY[1]-1 or z == x+bpX[0] or z == x+bpX[1]-1:
                 game_board[i][z] = '█'
     return game_board
 
@@ -54,17 +54,14 @@ def random_buildings(game_board, level):
     x = random_area[1]
     y = random_area[0]
     if level == 1:
-        game_board = generate_build(game_board, x, y, [[3, 8], [7, 19]])
+        game_board = generate_build(game_board, x, y, [3, 8], [7, 19])
         game_board[y+7][x+5+7] = '.'  # tavern doors
         game_board[y+7][x+6+7] = '.'  # tavern doors
         game_board[y+4][x+5+7] = 'O'  # tavern man
     if level == 2:
-        for i in range(y+4, y+8):
-            for z in range(x+4, x+19):
-                if i == y+4 or i == y+7 or z == x+4 or z == x+18:
-                    game_board[i][z] = '#'
+        game_board = generate_build(game_board, x, y, [3, 8], [4, 19])
         game_board[y+7-1][x+4] = '.'
-        game_board[y+5][x+10+7] = 'B'  # farmer wife
+        game_board[y+5][x+9+7] = '❤'  # farmer wife
         while x == random_area[1] and y == random_area[0]:  # random area for wheat
             x = random.randrange(0, 31, 30)
             y = random.randrange(0, 11, 10)
@@ -72,20 +69,14 @@ def random_buildings(game_board, level):
             for z in range(x+3, x+27):
                     game_board[i][z] = chr(182)
     if level == 3:
-        for i in range(y+3, y+8):
-            for z in range(x+9, x+17):
-                if i == y+3 or i == y+7 or z == x+9 or z == x+16:
-                    game_board[i][z] = '#'
+        game_board = generate_build(game_board, x, y, [3, 8], [9, 17])
         game_board[y+7][x+5+7] = '.'
         game_board[y+7][x+6+7] = '.'
-        game_board[y+4][x+5+7] = chr(216)  # boss
+        game_board[y+4][x+5+7] = "☠"  # boss
         while x == random_area[1] and y == random_area[0]:  # random area for new build
             x = random.randrange(0, 31, 30)
             y = random.randrange(0, 11, 10)
-        for i in range(y+2, y+7):
-            for z in range(x+8, x+18):
-                if i == y+2 or i == y+6 or z == x+8 or z == x+17:
-                    game_board[i][z] = '#'
+        game_board = generate_build(game_board, x, y, [2, 7], [8, 18])
         game_board[y+3][x+8] = '.'
     return game_board
 
