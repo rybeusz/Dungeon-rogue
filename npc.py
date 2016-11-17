@@ -96,13 +96,14 @@ def trader(backpack):
                 remove_corn = int(input("How much u wanna sell?: "))
                 if remove_corn > backpack["corn"][0]:
                     print("Trader say: ")
-                    print("You dont have that much corn in ur backpack ")
+                    print("You do not have that much corn in ur backpack ")
                     enter()
                 else:
                     print("Trader say: ")
                     print("Thanks for corn :) ")
                     inve.remove_item(backpack, loot2, remove_corn)
                     inve.add_to_inventory(backpack, loot, remove_corn)
+                    enter()
             except ValueError:
                 print("U need to write a number: ")
                 enter()
