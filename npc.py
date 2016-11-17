@@ -64,7 +64,7 @@ def wife(backpack):
     """function for interaction with wife <3 """
     print("\nYour wife says: ")
     if "corn" in backpack:
-        if backpack['corn'][0] <= 20:
+        if backpack['corn'][0] < 20:
             print("-You need to gather 20 corn cob so get back to work! ")
             enter()
         else:
