@@ -1,4 +1,7 @@
 import random
+import os
+import time
+from termcolor import cprint
 
 def user_choice():
     """ask for number and check if its int with right len"""
@@ -18,8 +21,24 @@ def random_number():
     return tuple(random.sample(range(1,10),3))
 
 
+def boss_pic():
+    f = open("boss.txt", 'r')
+    colorlist = ("red", "green", "yellow", "blue", "magenta", "cyan", "white")
+    effect_list = [line[:-1] for line in f]
+    f.close()
+    maxlen = len(effect_list[0])
+    for i in range(round(maxlen / 2)):
+        os.system('clear')
+        for z in range(len(effect_list)):
+            cprint(effect_list[z][:i + 3] + (" " * ((maxlen - i * 2) - 3)) + effect_list[z][maxlen - i:],
+                   random.choice(colorlist))
+        time.sleep(0.05)
+
+
 def main(vodka):
     """start game with amount of vodka in your backpack"""
+    os.system('clear')
+    boss_pic()
     i = vodka * 2
     drawn = random_number()
     print(drawn)

@@ -145,7 +145,7 @@ def fun_effectwow():
 
 def main():
     """Main function"""
-    inventory = {}
+    inventory = {'vodka':[1,'food',1]}
     while True:
         os.system('clear')
         fun_effectwow()
