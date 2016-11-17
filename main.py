@@ -6,7 +6,7 @@ from termcolor import cprint
 import inve
 
 
-def board(x, y, player_x, player_y):
+def board(x, y):
     """Create a board"""
     game_board = []
     for row in range(x):
@@ -16,7 +16,6 @@ def board(x, y, player_x, player_y):
                 game_board[row].append('█')
             else:
                 game_board[row].append('.')
-    game_board[player_x][player_y] = '@'
     return game_board
 
 
@@ -54,16 +53,22 @@ def random_buildings(game_board, level):
     random_area = [random.randrange(0, 11, 10), random.randrange(0, 31, 30)]
     x = random_area[1]
     y = random_area[0]
+    player_x = 0
+    player_y = 0
     if level == 1:
         game_board = generate_build(game_board, x, y, [3, 8], [7, 19])
         game_board[y + 7][x + 5 + 7] = '.'  # tavern doors
         game_board[y + 7][x + 6 + 7] = '.'  # tavern doors
         game_board[y + 4][x + 5 + 7] = 'O'  # tavern man
+        game_board[y + 6][x + 5 + 7] = '@'
+        player_x, player_y = y+6, x+5+7  # x is y and x is y, i know, it's confusing
         game_board = random_item(game_board, ['a', 'b', 'c', 'd', 'e'])  # clothes
     if level == 2:
         game_board = generate_build(game_board, x, y, [3, 8], [4, 19])
         game_board[y + 7 - 1][x + 4] = '.'
         game_board[y + 5][x + 9 + 7] = '❤'  # farmer wife
+        game_board[y + 5][x + 2 + 7] = '@'
+        player_x, player_y = y+5, x+2+7
         while x == random_area[1] and y == random_area[0]:  # random area for corn
             x = random.randrange(0, 31, 30)
             y = random.randrange(0, 11, 10)
@@ -75,6 +80,8 @@ def random_buildings(game_board, level):
         game_board[y + 7][x + 5 + 7] = '.'
         game_board[y + 7][x + 6 + 7] = '.'
         game_board[y + 4][x + 5 + 7] = "☠"  # boss
+        game_board[2][2] = '@'
+        player_x, player_y = 2, 2
         while x == random_area[1] and y == random_area[0]:  # random area for new build
             x = random.randrange(0, 31, 30)
             y = random.randrange(0, 11, 10)
@@ -82,7 +89,7 @@ def random_buildings(game_board, level):
         game_board[y + 3][x + 8] = '.'
         game_board[y + 5][x + 5 + 7] = '¢'
         game_board = random_item(game_board, ["♏"])
-    return game_board
+    return game_board, player_x, player_y
 
 
 def intro(level):
@@ -91,31 +98,35 @@ def intro(level):
     print("\nLEVEL ", level)
     if level == 1:
         print("""
-        You are a drunkard farmer. Last night
-        you drank too much. You don't know what is going on.
-        Talk to host if you want know what is your name.
-        Good luck!
+    You are poor farmer but you have a dream.
+    You want to sail the ship. Someone in city sell tickets.
+    But last night you drank too much. You don't know what is going on.
+    You're naked and you have a big hangover.
+    Talk to host if you want know what is your name.
+    Good luck!
         """)
     elif level == 2:
         print("""
-        After you get all your clothes you go to your farm.
-        From a distance you hear the voice of your wife.
-        You have bad feelings...
+    After you get all your clothes you go back to your farm.
+    From a distance you hear the voice of your wife.
+    Now you are in home and you have a bad feelings...
         """)
     elif level == 3:
         print("""
-        It's time to sell your harvest. You go to city
-        and you see two buildings, in one of them is merchant.
-        Talk to him.
+    It's time to sell your harvest and buy a ticket for great travel.
+    You go to city and you see two buildings, in one of them is ticket seller.
+    Talk to him.
         """)
     input("Click anything to continue")
 
 
-def levels(level, inventory, player_x=3, player_y=3):
+def levels(level, inventory):
     """Level inizialization"""
     intro(level)
-    game_board = board(20, 60, player_x, player_y)
-    game_board = random_buildings(game_board, level)
+    game_board = board(20, 60)
+    buildings_and_playerpos = random_buildings(game_board, level)
+    game_board = buildings_and_playerpos[0]
+    player_x, player_y = buildings_and_playerpos[1], buildings_and_playerpos[2]
     while True:
         os.system('clear')
         show_board(game_board)
@@ -151,22 +162,33 @@ def main():
         os.system('clear')
         fun_effectwow()
         cprint("\n▁▂▄▅▆▇█ FARMER GAME █▇▆▅▄▂▁", 'yellow')
-        print("\n1. PLAY\n2. HELP\n3. QUIT\n")
+        print("\n1. PLAY\n2. HELP\n3. CREDITS\n4. QUIT")
         user_choice = input("You pick: ")
         if user_choice == "1":
             levels(1, inventory)
-            levels(2, inventory, 1, 2)  # 1/1
+            levels(2, inventory)
             levels(3, inventory)
         elif user_choice == "2":
             os.system('clear')
             print("""\nHELP PAGE
 
         Use W,A,S,D keys to control your hero.
-        Press E to talk.
+        Go near to NPC to talk.
         Go on item to take it.
             """)
             input("Click anything to continue")
         elif user_choice == "3":
+            os.system('clear')
+            print("""\nCREDITS
+
+       --------   -----------     --------
+        Dawid      Sebastian       Stefan
+         Kobus       Kurant         Kania
+       --------   -----------     --------
+
+            """)
+            input("Click anything to continue")
+        elif user_choice == "4":
             quit()
         else:
             print("Wrong command")
