@@ -18,12 +18,13 @@ def user_choice():
 
 def random_number():
     """return random number"""
-    return tuple(random.sample(range(1,10),3))
+    return tuple(random.sample(range(0,10),3))
 
 
 def boss_pic():
+    """aboss animation"""
     f = open("boss.txt", 'r')
-    colorlist = ("red", "green", "yellow", "blue", "magenta", "cyan", "white")
+    colorlist = ("red", "yellow", "blue", "white")
     effect_list = [line[:-1] for line in f]
     f.close()
     maxlen = len(effect_list[0])
@@ -36,6 +37,7 @@ def boss_pic():
 
 
 def titanic_pic():
+    """end scene animation"""
     f = open("titanic.txt", 'r')
     colorlist = ("blue", "magenta", "white")
     effect_list = [line[:-1] for line in f]
@@ -68,7 +70,9 @@ def main(vodka):
                     print("\033[93m {}\033[00m".format('warm'), end=' ')
             if user == drawn:
                 print('\x1b[10;33;41m'+ '\nYou win titanic ticket nice!' + '\x1b[0m')
+                time.sleep(3)
                 titanic_pic()
+                time.sleep(1)
                 quit()
 
         else:

@@ -7,8 +7,7 @@ import string
 # loot must be build like this loot = [['gold coin', 'other', 1]]
 #                                          name       type  weight
 #
-# example of loot loot = [['gold coin', 'other', 1], ['dagger', 'weapon', 2], ['gold coin', 'other', 1],
-#                   ['gold coin', 'other', 1],['ruby', 'other', 1]]
+# example of loot loot = [['gold coin', 'other', 1]]
 #
 # example of invenotry inv = {'rope': [1, 'other', 12], 'torch': [6, 'other', 12], 'gold coin': [42, 'other', 42],
 #                       'dagger': [1, 'weapon', 2],'arrow': [12, 'weapon', 12]}

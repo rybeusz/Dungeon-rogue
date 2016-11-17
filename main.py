@@ -27,6 +27,7 @@ def show_board(game_board):
 
 
 def random_item(game_board, items):
+    """print random items on the board"""
     i = 0
     while True:
         x = random.randrange(19)
