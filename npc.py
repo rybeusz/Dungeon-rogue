@@ -13,7 +13,7 @@ def menel(backpack):
             vodka_sell = input("Wanna change 10 gold coins for 1 vodka? / write yes to accept or no for reject")
             if vodka_sell == "yes":
                 inve.remove_item(backpack, loot[1], 10)
-                inve.add_to_inventory(backpack, loot[0], 1)
+                inve.add_to_inventory(backpack, loot[0])
             if vodka_sell == "no":
                 print("bye ")
             else:
@@ -46,13 +46,13 @@ def wife2(backpack):  # ogarnąć ta ku.... tylko pierwsze podejsice
 
 def wife1(backpack):
     if "corn" not in backpack:
-        print("Where have u been u f...... drunktard, get back to work and collect 20 corn cobs! ")
+        print("Where have u been u f...... drunkard, get back to work and collect 20 corn cobs! ")
 
 
 def trader(backpack):
     loot = [["corn", "food", 1]]
     if "corn" in backpack:
-        x = input("Do u wanna sell some corn mate? write yes or no: ")
+        x = input("Do u wanna sell some corn mate? \n write yes or no: ")
         x = x.lower()
         if x == "yes":
             remove_corn = int(input("How much u wanna sell?: "))
