@@ -4,7 +4,7 @@ def user_choice():
     """ask for number and check if its int with right len"""
     while True:
         try:
-            user_input = input('\nchoose your number: ')
+            user_input = input('\nchoose your number, member if u guess right u will win Titanic ticket: ')
             if len(user_input) == 3 and type(int(user_input)) == int:
                 return tuple(map(int, user_input))
         except:
