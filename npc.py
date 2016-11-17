@@ -49,7 +49,6 @@ def host(backpack, name="Mariusz"):
     namei = str(name)
     print("\nHost says: ")
     if ("clothes" not in backpack) or (backpack['clothes'][0] < 5):
-        print("\nHost say: ")
         print("""-Hey {}! You don't look good...
 I never expect that farmer can drink so much alcohol in one night.
 You are naked so before you come back to your wife
