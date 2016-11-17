@@ -124,7 +124,7 @@ def levels(level, inventory, player_x=3, player_y=3):
         player_x = move_variables[1]
         player_y = move_variables[2]
         inventory = move_variables[3]
-        if player_x == 1:
+        if move_variables[4] is True:
             break
 
 

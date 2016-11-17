@@ -12,10 +12,10 @@ def bum(backpack):
     if "gold coin" in backpack:
         if backpack['gold coin'][0] > 10:
             print("Bum say: ")
-            vodka_sell = input("Wanna change 1 gold coins for 1 vodka?\nwrite yes to accept or no for reject")
+            vodka_sell = input("Wanna change 1 gold coins for 1 vodka?\n(write yes to accept or no for reject) ")
             if vodka_sell == "yes":
-                vodka_ask = input("How much vodka u need? ")
-                if vodka_ask > backpack["gold coin"][0]:
+                vodka_ask = int(input("How much vodka u need? "))
+                if vodka_ask < backpack["gold coin"][0]:
                     print("Bum say: ")
                     print("GLUP ")
                     inve.remove_item(backpack, loot2, vodka_ask)
@@ -25,17 +25,17 @@ def bum(backpack):
                     print("Bum say: ")
                     print("U dont have coins for this, f... off: ")
                     enter()
-            if vodka_sell == "no":
+            elif vodka_sell == "no":
                 print("Bum say: ")
                 print("bye come to papa again :0 ")
                 enter()
             else:
                 print("Bum say: ")
-                print("You need to write / yes or no ")
+                print("I dont know whay you talking about ")
                 enter()
         else:
             print("Bum say: ")
-            print("You must have at least 10 to buy stuff from me! ")
+            print("You must have at least 10 gold coin to buy stuff from me! ")
             enter()
     else:
         print("Bum say: ")
@@ -46,7 +46,7 @@ def bum(backpack):
 
 def host(backpack, name="Mariusz"):
     namei = str(name)
-    if "clothes" not in backpack:
+    if ("clothes" not in backpack) or (backpack['clothes'][0] < 5):
         print("Host say: ")
         print("{} u need to dress up before u can leave my tavern, so come back with some cloths".format(namei))
         enter()
@@ -54,6 +54,7 @@ def host(backpack, name="Mariusz"):
         print("Host say: ")
         print("U look like a badass right now u can go ")
         enter()
+        return True
 
 
 def wife(backpack):
@@ -66,6 +67,7 @@ def wife(backpack):
             print("Wife say: ")
             print("Thanks u can go now ")
             enter()
+            return True
     if "corn" not in backpack:
         print("Wife say: ")
         print("Where have u been u f...... drunkard, get back to work and collect 20 corn cobs! ")
@@ -114,6 +116,7 @@ def boss(backpack):
         guess.main(backpack["vodka"][0])
         inve.remove_item(backpack, loot, backpack["vodka"][0])
         enter()
+
     else:
         print("Boss say: ")
         print("u need to have a vodka to play with me boy!\nCome back when u got some boy! ")

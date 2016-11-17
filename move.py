@@ -17,6 +17,7 @@ def movement(game_board, player_x, player_y, inv):
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     # end of black magic
     key = {"w": (-1, 0), "s": (1, 0), "a": (0, -1), "d": (0, 1)}
+    go_to_next_level = False
     if x in ("w", "s", "a", "d"):
         pos = game_board[player_x + key[x][0]][player_y + key[x][1]]
         if pos == chr(182):  # collecting wheat
@@ -27,7 +28,7 @@ def movement(game_board, player_x, player_y, inv):
             inve.add_to_inventory(inv, cloth, 1)
         if pos in ["O", '❤', "☠", "♏", '¢']:  # npc functions
             npc_dict = {"O": 'host', '❤': 'wife', "☠": 'boss', "♏": 'bum', '¢': 'trader'}
-            getattr(npc, npc_dict[pos])(inv)
+            go_to_next_level = getattr(npc, npc_dict[pos])(inv)
         if pos not in special_char:  # moving
             game_board[player_x][player_y] = "."
             game_board[player_x + key[x][0]][player_y + key[x][1]] = "@"
@@ -39,4 +40,4 @@ def movement(game_board, player_x, player_y, inv):
         print(inv)
         quit()
 
-    return game_board, player_x, player_y, inv
+    return game_board, player_x, player_y, inv, go_to_next_level
