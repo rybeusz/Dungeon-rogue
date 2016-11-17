@@ -14,16 +14,20 @@ def bum(backpack):
             print("Bum say: ")
             vodka_sell = input("Wanna change 1 gold coins for 1 vodka?\n(write yes to accept or no for reject) ")
             if vodka_sell == "yes":
-                vodka_ask = int(input("How much vodka u need? "))
-                if vodka_ask < backpack["gold coin"][0]:
-                    print("Bum say: ")
-                    print("GLUP ")
-                    inve.remove_item(backpack, loot2, vodka_ask)
-                    inve.add_to_inventory(backpack, loot, vodka_ask)
-                    enter()
-                else:
-                    print("Bum say: ")
-                    print("U dont have coins for this, f... off: ")
+                try:
+                    vodka_ask = int(input("How much vodka u need? "))
+                    if vodka_ask < backpack["gold coin"][0]:
+                        print("Bum say: ")
+                        print("GLUP ")
+                        inve.remove_item(backpack, loot2, vodka_ask)
+                        inve.add_to_inventory(backpack, loot, vodka_ask)
+                        enter()
+                    else:
+                        print("Bum say: ")
+                        print("U dont have coins for this, f... off: ")
+                        enter()
+                except ValueError:
+                    print("U need to write a number: ")
                     enter()
             elif vodka_sell == "no":
                 print("Bum say: ")
@@ -82,17 +86,21 @@ def trader(backpack):
         x = input("Do u wanna sell some corn mate?\nwrite yes or no: ")
         x = x.lower()
         if x == "yes":
-            print("Trader ask: ")
-            remove_corn = int(input("How much u wanna sell?: "))
-            if remove_corn > backpack["corn"][0]:
-                print("Trader say: ")
-                print("You dont have that much corn in ur backpack ")
+            try:
+                print("Trader ask: ")
+                remove_corn = int(input("How much u wanna sell?: "))
+                if remove_corn > backpack["corn"][0]:
+                    print("Trader say: ")
+                    print("You dont have that much corn in ur backpack ")
+                    enter()
+                else:
+                    print("Trader say: ")
+                    print("Thanks for corn :) ")
+                    inve.remove_item(backpack, loot2, remove_corn)
+                    inve.add_to_inventory(backpack, loot, remove_corn)
+            except ValueError:
+                print("U need to write a number: ")
                 enter()
-            else:
-                print("Trader say: ")
-                print("Thanks for corn :) ")
-                inve.remove_item(backpack, loot2, remove_corn)
-                inve.add_to_inventory(backpack, loot, remove_corn)
         elif x == "no":
             print("Trader say: ")
             print("Come to me when u wanna sell corn ")
