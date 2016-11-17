@@ -65,19 +65,21 @@ def main(vodka):
             for z in range(3):
                 if (user[z] in drawn) and (user[z] == drawn[z]):
                     print("\033[91m {}\033[00m".format('hot'), end=' ')
-            for f in range(3):
-                if (user[f] in drawn) and (user[f] != drawn[f]):
+                else:
+                    pass
+            for z in range(3):
+                if (user[z] in drawn) and (user[z] != drawn[z]):
                     print("\033[93m {}\033[00m".format('warm'), end=' ')
-            if user == drawn:
-                print('\x1b[10;33;41m'+ '\nYou win titanic ticket nice!' + '\x1b[0m')
-                time.sleep(3)
-                titanic_pic()
-                time.sleep(1)
-                quit()
-
+                else:
+                    pass
         else:
             print("\033[94m {}\033[00m".format('cold'), end=' ')
-
+        if user == drawn:
+            print('\x1b[10;33;41m'+ '\nYou win titanic ticket nice!' + '\x1b[0m')
+            time.sleep(3)
+            titanic_pic()
+            time.sleep(1)
+            quit()
 
 if __name__ == '__main__':
     main()

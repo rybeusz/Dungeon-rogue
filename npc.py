@@ -3,10 +3,12 @@ import guess
 
 
 def enter():
+    """function for print stuff in console"""
     input("\nClick Enter to continue ")
 
 
 def bum(backpack):
+    """function for interaction with bum, buying vodka for coins + error handling"""
     loot = [["vodka", "food", 1]]
     loot2 = [["gold coin", "other", 1]]
     print("\nBum says: ")
@@ -18,13 +20,13 @@ def bum(backpack):
                     vodka_ask = int(input("-How much vodka u need my friend?\n"))
                     if vodka_ask <= backpack["gold coin"][0]:
                         print("GLUP ")
-                        inve.remove_item(backpack, loot2, vodka_ask)
-                        inve.add_to_inventory(backpack, loot, vodka_ask)
+                        inve.remove_item(backpack, loot2, vodka_ask)        # removing coins from backpack
+                        inve.add_to_inventory(backpack, loot, vodka_ask)    # adding vodka
                         enter()
-                    else:
+                    else:  # handling situation when u have no gold coins
                         print("-U dont have coins for this...god's drink, f... off! ")
                         enter()
-                except ValueError:
+                except ValueError:   # handling bugs with writing some other stuff then int
                     print("(U need to write a number) ")
                     enter()
             elif vodka_sell == "no":
@@ -43,6 +45,7 @@ def bum(backpack):
 
 
 def host(backpack, name="Mariusz"):
+    """function for interaction with host"""
     namei = str(name)
     print("\nHost says: ")
     if ("clothes" not in backpack) or (backpack['clothes'][0] < 5):
@@ -55,10 +58,11 @@ find your clothes, they are close to tavern.""".format(namei))
     else:
         print("-Now you look like a badass! Go fast to your \nhome before your wife will be very angry. ")
         enter()
-        return True
+        return True         # return True to change lvl
 
 
 def wife(backpack):
+    """function for interaction with wife <3 """
     print("\nYour wife says: ")
     if "corn" in backpack:
         if backpack['corn'][0] <= 20:
@@ -67,13 +71,14 @@ def wife(backpack):
         else:
             print("-Ahh you are a bastard but I know your dream...\nNow go to city and buy your ticket my love :* ")
             enter()
-            return True
+            return True         # because of this we can change lvl
     if "corn" not in backpack:
         print("-Where have u been u f...... drunkard, \nget back to work and collect 20 corn cobs! ")
         enter()
 
 
 def trader(backpack):
+    """interaction with trader selling corn for gold coins + error handling """
     loot = [["gold coin", "other", 1]]
     loot2 = [["corn", "food", 1]]
     print("\nTrader says: ")
@@ -88,9 +93,9 @@ def trader(backpack):
                     enter()
                 else:
                     print("-Thanks for corn :) ")
-                    enter()
                     inve.remove_item(backpack, loot2, remove_corn)
                     inve.add_to_inventory(backpack, loot, remove_corn)
+                    enter()
             except ValueError:
                 print("(U need to write a number): ")
                 enter()
@@ -107,6 +112,7 @@ def trader(backpack):
 
 
 def boss(backpack):
+    """interaction with boss, MEMBER u need to have vodka if u wanna play boss game :> """
     loot = [["vodka", "food", 1]]
     print("\nTicket seller says: ")
     if "vodka" in backpack:
