@@ -7,7 +7,7 @@ def movement(list, player_x, player_y, inv):
     import sys
     import tty
     import termios
-    special_char = ["#", "O", "B", chr(216), "&"]
+    special_char = ['█', "O", '❤', "☠", "&"]
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
