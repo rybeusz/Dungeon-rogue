@@ -1,6 +1,7 @@
 import random
 
 def user_choice():
+    """ask for number and check if its int with right len"""
     try:
         user_input = input('\nchoose your number: ')
         if len(user_input) == 3 and type(int(user_input)) == int:
@@ -10,11 +11,12 @@ def user_choice():
 
 
 def random_number():
+    """return random number"""
     return tuple(random.sample(range(1,10),3))
 
 
 def main(vodka):
-   # print(random_number())
+    """start game with amount of vodka in your backpack"""
     i = vodka * 2
     drawn = random_number()
     print(drawn)
