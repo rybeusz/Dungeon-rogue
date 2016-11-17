@@ -83,7 +83,7 @@ def trader(backpack):
     loot2 = [["corn", "food", 1]]
     if "corn" in backpack:
         print("Trader ask: ")
-        x = input("Do u wanna sell some corn mate?\nwrite yes or no: ")
+        x = input("Do u wanna sell some corn mate?\n(write yes or no): ")
         x = x.lower()
         if x == "yes":
             try:
@@ -107,7 +107,7 @@ def trader(backpack):
             enter()
         else:
             print("Trader say: ")
-            print("Your answer need to be yes or no ")
+            print("(Your answer need to be yes or no) ")
             enter()
     else:
         print("Trader say: ")
