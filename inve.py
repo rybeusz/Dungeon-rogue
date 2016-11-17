@@ -4,6 +4,9 @@ import string
 # inventory must be empty before import
 # inventory must be build like this inventory = {} --> inventory = {'stuff':[1,     'type',     2]}
 #                                                                    name  amount    type   weight
+# loot must be build like this loot = [['gold coin', 'other', 1]]
+#                                          name       type  weight
+#
 # example of loot loot = [['gold coin', 'other', 1], ['dagger', 'weapon', 2], ['gold coin', 'other', 1],
 #                   ['gold coin', 'other', 1],['ruby', 'other', 1]]
 #
@@ -33,6 +36,8 @@ def remove_item(inventory, loot, amount):
                 inventory[item[0]][0] -= 1
                 inventory[item[0]][2] -= item[2]
                 amoun -= 1
+            if inventory[item[0]][0] == 0:
+                del inventory[item[0]]
             else:
                 pass
     return inventory
@@ -49,6 +54,7 @@ def add_to_inventory(inventory, loot, amount):
                 amoun -= 1
             else:
                 inventory[item[0]] = [1, item[1], item[2]]
+                amoun -= 1
     return inventory
 
 
