@@ -18,10 +18,9 @@ def random_number():
     return tuple(random.sample(range(1,10),3))
 
 
-def main():#(vodka):
+def main(vodka):
     """start game with amount of vodka in your backpack"""
-    #i = vodka * 2
-    i = 2
+    i = vodka * 2
     drawn = random_number()
     print(drawn)
     while i > 0:
