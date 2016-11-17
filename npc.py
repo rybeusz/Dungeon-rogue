@@ -46,13 +46,14 @@ def wife2(backpack):  # ogarnąć ta ku.... tylko pierwsze podejsice
 
 def wife1(backpack):
     if "corn" not in backpack:
-        print("Where have u been u f...... drunktard, get back to work and collect 20 corn cobs! ")
+        print("Where have u been u f...... drunkard, get back to work and collect 20 corn cobs! ")
 
 
 def trader(backpack):
+    loot2 = [["gold coin", "other", 1]]
     loot = [["corn", "food", 1]]
     if "corn" in backpack:
-        x = input("Do u wanna sell some corn mate? write yes or no: ")
+        x = input("Do u wanna sell some corn mate? \n write yes or no: ")
         x = x.lower()
         if x == "yes":
             remove_corn = int(input("How much u wanna sell?: "))
@@ -60,6 +61,7 @@ def trader(backpack):
                 print("u dont have that much corn in ur backpack ")
             else:
                 inve.remove_item(backpack, loot, remove_corn)
+                inve.add_to_inventory(backpack, loot2, remove_corn)
         elif x == "no":
             print("Come to me when u wanna sell corn ")
         else:
