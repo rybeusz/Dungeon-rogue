@@ -14,19 +14,20 @@ def bum(backpack):
     print("\nBum says: ")
     if "gold coin" in backpack:
         if backpack['gold coin'][0] >= 1:
-            vodka_sell = input("-I see gold in your pocket!\nDo u wanna change 1 gold coin for 1 vodka?\n(write yes to accept or no for reject)\n")
+            vodka_sell = input(
+                "-I see gold in your pocket!\nDo u wanna change 1 gold coin for 1 vodka?\n(write yes to accept or no for reject)\n")
             if vodka_sell == "yes":
                 try:
                     vodka_ask = int(input("-How much vodka u need my friend?\n"))
                     if vodka_ask <= backpack["gold coin"][0]:
                         print("GLUP ")
-                        inve.remove_item(backpack, loot2, vodka_ask)        # removing coins from backpack
-                        inve.add_to_inventory(backpack, loot, vodka_ask)    # adding vodka
+                        inve.remove_item(backpack, loot2, vodka_ask)  # removing coins from backpack
+                        inve.add_to_inventory(backpack, loot, vodka_ask)  # adding vodka
                         enter()
                     else:  # handling situation when u have no gold coins
                         print("-U dont have coins for this...god's drink, f... off! ")
                         enter()
-                except ValueError:   # handling bugs with writing some other stuff then int
+                except ValueError:  # handling bugs with writing some other stuff then int
                     print("(U need to write a number) ")
                     enter()
             elif vodka_sell == "no":
@@ -57,7 +58,7 @@ find your clothes, they are close to tavern.""".format(namei))
     else:
         print("-Now you look like a badass! Go fast to your \nhome before your wife will be very angry. ")
         enter()
-        return True         # return True to change lvl
+        return True  # return True to change lvl
 
 
 def wife(backpack):
@@ -70,7 +71,7 @@ def wife(backpack):
         else:
             print("-Ahh you are a bastard but I know your dream...\nNow go to city and buy your ticket my love :* ")
             enter()
-            return True         # because of this we can change lvl
+            return True  # because of this we can change lvl
     if "corn" not in backpack:
         print("-Where have u been u f...... drunkard, \nget back to work and collect 20 corn cobs! ")
         enter()

@@ -26,12 +26,12 @@ def boss_pic():
     effect_list = [line[:-1] for line in f]
     f.close()
     maxlen = len(effect_list[0])
-    for i in range(round(maxlen / 2)+1):
+    for i in range(round(maxlen / 2) + 1):
         os.system('clear')
         for z in range(len(effect_list)):
             if z != 0:
                 cprint(effect_list[z][:i] + (" " * ((maxlen - i * 2))) + effect_list[z][maxlen - i:],
-                    'yellow',attrs=['reverse'])#random.choice(colorlist))
+                       'yellow', attrs=['reverse'])  # random.choice(colorlist))
         time.sleep(0.05)
 
 
@@ -42,17 +42,17 @@ def titanic_pic():
     effect_list = [line[:-1] for line in f]
     f.close()
     maxlen = len(effect_list[0])
-    for i in range(round(maxlen / 2)+1):
+    for i in range(round(maxlen / 2) + 1):
         os.system('clear')
         for z in range(len(effect_list)):
             if z == 7:
                 cprint("~^" * maxlen, "blue")
             elif z == 1:
-                cprint(effect_list[z][:15], "white",end="")
+                cprint(effect_list[z][:15], "white", end="")
                 cprint(effect_list[z][15:], "red")
             else:
                 cprint(effect_list[z][:16] + (" " * ((maxlen - i * 2))) + effect_list[z][16:],
-                    "white")
+                       "white")
         time.sleep(0.10)
 
 
@@ -81,11 +81,12 @@ def main(vodka=3):
         else:
             print("\033[94m {}\033[00m".format('cold'), end=' ')
         if user == drawn:
-            print('\x1b[10;33;41m'+ '\nYou win titanic ticket nice!' + '\x1b[0m')
+            print('\x1b[10;33;41m' + '\nYou win titanic ticket nice!' + '\x1b[0m')
             time.sleep(3)
             titanic_pic()
             time.sleep(1)
             quit()
+
 
 if __name__ == '__main__':
     main()

@@ -35,7 +35,6 @@ def movement(game_board, player_x, player_y, inv):
             player_x += key[x][0]
             player_y += key[x][1]
 
-
     if x == "x":
         print(inv)
         quit()
