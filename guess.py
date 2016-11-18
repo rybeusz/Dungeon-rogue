@@ -7,7 +7,7 @@ def user_choice():
     """ask for number and check if its int with right len"""
     while True:
         try:
-            user_input = input('\nchoose your number, member if u guess right u will win Titanic ticket: ')
+            user_input = input('\nChoose your number: ')
             if len(user_input) == 3 and type(int(user_input)) == int:
                 return tuple(map(int, user_input))
         except:
@@ -58,6 +58,7 @@ def main(vodka):
     i = vodka * 2
     drawn = random_number()
     print(drawn)
+    print("\033[94m {}\033[00m".format('\nREMEMBER IF YOU GUESS RIGHT YOU WILL WIN TITANIC TICKET'))
     while i > 0:
         user = user_choice()
         i -= 1
