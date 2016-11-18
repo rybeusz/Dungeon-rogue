@@ -23,15 +23,15 @@ def random_number():
 def boss_pic():
     """aboss animation"""
     f = open("boss.txt", 'r')
-    colorlist = ("red", "yellow", "blue", "white")
     effect_list = [line[:-1] for line in f]
     f.close()
     maxlen = len(effect_list[0])
-    for i in range(round(maxlen / 2)):
+    for i in range(round(maxlen / 2)+1):
         os.system('clear')
         for z in range(len(effect_list)):
-            cprint(effect_list[z][:i + 3] + (" " * ((maxlen - i * 2) - 3)) + effect_list[z][maxlen - i:],
-                   random.choice(colorlist))
+            if z != 0:
+                cprint(effect_list[z][:i] + (" " * ((maxlen - i * 2))) + effect_list[z][maxlen - i:],
+                    'yellow',attrs=['reverse'])#random.choice(colorlist))
         time.sleep(0.05)
 
 
@@ -46,9 +46,9 @@ def titanic_pic():
         os.system('clear')
         for z in range(len(effect_list)):
             if z == 7:
-                # cprint(effect_list[z][:16] + ("~^" * (int(maxlen/2 - i)) ) + effect_list[z][16:],
-                    # random.choice(colorlist))
                 cprint("~^" * maxlen, random.choice(colorlist))
+            elif z == 1:
+                cprint(effect_list[z], random.choice(colorlist))
             else:
                 cprint(effect_list[z][:16] + (" " * ((maxlen - i * 2))) + effect_list[z][16:],
                     random.choice(colorlist))
