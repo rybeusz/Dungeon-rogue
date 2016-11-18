@@ -38,7 +38,7 @@ def boss_pic():
 def titanic_pic():
     """end scene animation"""
     f = open("titanic.txt", 'r')
-    colorlist = ("blue", "magenta", "white")
+    colorlist = ("blue", "white")
     effect_list = [line[:-1] for line in f]
     f.close()
     maxlen = len(effect_list[0])
@@ -46,12 +46,12 @@ def titanic_pic():
         os.system('clear')
         for z in range(len(effect_list)):
             if z == 7:
-                cprint("~^" * maxlen, random.choice(colorlist))
+                cprint("~^" * maxlen, "blue")
             elif z == 1:
-                cprint(effect_list[z], random.choice(colorlist))
+                cprint(effect_list[z], "red")
             else:
                 cprint(effect_list[z][:16] + (" " * ((maxlen - i * 2))) + effect_list[z][16:],
-                    random.choice(colorlist))
+                    "white")
         time.sleep(0.10)
 
 
