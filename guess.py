@@ -48,7 +48,8 @@ def titanic_pic():
             if z == 7:
                 cprint("~^" * maxlen, "blue")
             elif z == 1:
-                cprint(effect_list[z], "red")
+                cprint(effect_list[z][:15], "white",end="")
+                cprint(effect_list[z][15:], "red")
             else:
                 cprint(effect_list[z][:16] + (" " * ((maxlen - i * 2))) + effect_list[z][16:],
                     "white")
